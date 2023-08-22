@@ -4,7 +4,7 @@ import HeroImage from '../app/assets/images/hero-img.png';
 import Link from 'next/link';
 const Hero = () => {
     return (
-        <div className='bg-blue-200 h-full pt-24 pb-6'>
+        <div className='bg-blue-200 h-full pt-24 pb-12'>
             <div className='container flex '>
                 {/* text about hero section */}
                 <div>
