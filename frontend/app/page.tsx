@@ -1,8 +1,10 @@
+import { Hero } from "@/components";
 
 const Home = () => {
     return (
-        <div
-        > Hi</div>
+        <div> 
+            <Hero/>
+        </div>
     );
 }
 

@@ -41,7 +41,7 @@ const Navbar = () =>
             <div className='flex justify-between space-x-4'>
                 <i className="ri-heart-line text-xl cursor-pointer"></i>
                 <i className="ri-shopping-cart-line text-xl cursor-pointer"></i>
-                <i className="ri-user-fill text-xl cursor-pointer"></i>
+                <i className="ri-menu-line text-xl cursor-pointer"></i>
             </div>
             
            

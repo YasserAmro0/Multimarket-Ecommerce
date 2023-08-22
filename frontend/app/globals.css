@@ -1,6 +1,6 @@
 /* google fonts */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
-@import "~remixicon/fonts/remixicon.css";
+@import "remixicon/fonts/remixicon.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -26,9 +26,7 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: "Montserrat", sans-serif;
-}
+
 
 h1,
 h2,
