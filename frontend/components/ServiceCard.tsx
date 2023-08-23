@@ -4,7 +4,7 @@ import serviceData from '@/app/assets/data/serviceData';
 const ServiceCard = () => {
     return (
         <div className='mt-8'>
-            <div className='container flex justify-between'>
+            <div className='container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
                 {serviceData.map((data, index) => { 
                     const { title, subtitle, icon, bg } = data;
                     return (
