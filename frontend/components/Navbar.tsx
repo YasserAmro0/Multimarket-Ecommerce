@@ -4,12 +4,16 @@ import Link from 'next/link'
 import Image from 'next/image';
 import logoImage from '../app/assets/images/eco-logo.png';
 import { useState } from 'react';
+import  Modal  from './Modal';
 
 const Navbar = () => {
     const [isExpanded, toggleExpansion] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+    const [isLoginPage, setLoginPage] = useState(false);
     const toggleMenu = () => {
         toggleExpansion(!isExpanded);
     };
+    
     return (
         <div className='bg-gray-50  shadow-md'>
             <div className='container flex justify-between'>
@@ -44,30 +48,48 @@ const Navbar = () => {
 
                 {/* Icons */}
                 <div className='flex justify-between space-x-4'>
-                    <i className="ri-heart-line text-xl cursor-pointer"></i>
-                    <i className="ri-shopping-cart-line text-xl cursor-pointer"></i>
+                    <div className="icon-container relative">
+                        <i className="ri-heart-line text-xl cursor-pointer"></i>
+                        <div className="notification-circle ">3</div>
+                    </div>
+                    <div className="icon-container relative">
+                        <i className="ri-shopping-cart-line text-xl cursor-pointer"></i>
+                        <div className="notification-circle">7</div>
+                    </div>
                     <i className="ri-menu-line text-xl cursor-pointer" onClick={toggleMenu}></i>
-                    <div id="menuDropdown" className={` absolute ${isExpanded ? '' : 'hidden' } bg-gray-50 p-4 rounded shadow-md right-20 top-12`}>
+                    <div id="menuDropdown" className={` absolute ${isExpanded ? '' : 'hidden'} bg-gray-50 p-4 rounded shadow-md right-20 top-12`}>
                         <ul className='px-4'>
                             <li>
-                                <Link href='/login'>
+                                <button  onClick={() => {
+                                    setIsOpen(true)
+                                    setLoginPage(true);
+                                }}>
                                     Login
-                                </Link>
+                                </button>
                             </li>
                             <li className='border-t-2 w-full'>
-                                <Link href='/signup'>
+                                <button  onClick={() => {
+                                    setIsOpen(true)
+                                    setLoginPage(false);
+                                }}>
                                     SignUp
-                                </Link>
+                                </button>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
+            <Modal
+                isOpen={isOpen}
+                closeModel={() => setIsOpen(false)} 
+                isLoginPage={isLoginPage}
+                setLoginPage={setLoginPage}
+            />
 
         </div>
     );
-    
+
 }
-    
+
 
 export default Navbar;

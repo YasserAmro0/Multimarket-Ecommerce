@@ -5,6 +5,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.icon-container {
+  margin-right: 20px;
+}
+
+.notification-circle {
+  @apply absolute top-1 left-3 bg-[#0a1d37] text-white rounded-full p-2 text-xs w-4 h-4 flex items-center justify-center;
+}
+
 
 /*  css variables */
 :root {
@@ -63,4 +71,9 @@ a {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+}
+
+.custom-border {
+  border: 1px solid #ccc;
+  padding: 10px;
 }

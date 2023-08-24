@@ -23,7 +23,7 @@ const OffersSection = () => {
     
 
   return (
-      <div className='full-w bg-slate-950'>
+      <div className='full-w bg-slate-950 my-6'>
           <div className='container flex justify-between'>
               {/* content */}
               <div className='mt-6'>
