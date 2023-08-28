@@ -5,9 +5,13 @@ import Card from './Card';
 import OffersSection from './OffersSection';
 import Footer from './Footer';
 import Modal from './Modal';
+import FilterByCategory from './FilterByCategory';
+import SortByPrice from './SortByPrice';
+import SearchProducts from './SearchProducts';
 export {
     Navbar, Hero,
     ServiceCard, Card,
     OffersSection, Footer,
-    Modal
+    Modal, FilterByCategory,
+    SortByPrice , SearchProducts
 };

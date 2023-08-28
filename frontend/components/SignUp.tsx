@@ -1,12 +1,9 @@
 import { SignUpAndLoginProps } from "@/types";
 import {
     Card,
-    Input,
-    Checkbox,
     Button,
     Typography,
 } from "@material-tailwind/react";
-import Link from "next/link";
 
 const SignUp = ({ setLoginPage }: SignUpAndLoginProps)=> {
     return (
