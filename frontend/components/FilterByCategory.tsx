@@ -15,9 +15,9 @@ const FilterByCategory = () => {
     const [selectedCategory, setSelectedCategory] = useState(Categories[0])
 
   return (
-      <div>
+      <div className="relative w-fit z-10">
           <Listbox value={selectedCategory} onChange={setSelectedCategory}>
-              <Listbox.Button className=' w-full min-w-[127px] flex justify-between items-center cursor-default rounded-lg bg-[#0a1d37] py-2 px-3 text-left shadow-md sm:text-sm border text-white'>
+              <Listbox.Button className='relative w-full min-w-[127px] flex justify-between items-center cursor-default rounded-lg bg-[#0a1d37] py-2 px-3 text-left shadow-md sm:text-sm border text-white'>
                   {selectedCategory.name}
                   <Image
                       src={arrowImage}
@@ -27,7 +27,7 @@ const FilterByCategory = () => {
                       className="ml-4 object-contain"
                   />
               </Listbox.Button>
-              <Listbox.Options className='mt-1 max-h-60 w-full overflow-auto rounded-md text-white bg-[#0a1d37] py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
+              <Listbox.Options className='absolute mt-1 max-h-60 w-full overflow-auto rounded-md text-white bg-[#0a1d37] py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
                   {Categories.map((category) => (
                       <Listbox.Option
                           key={category.id}
