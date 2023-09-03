@@ -57,7 +57,7 @@ const Navbar = () => {
                         <div className="notification-circle">0</div>
                     </div>
                     <i className="ri-menu-line text-xl cursor-pointer" onClick={toggleMenu}></i>
-                    <div id="menuDropdown" className={` absolute ${isExpanded ? '' : 'hidden'} bg-gray-50 p-4 rounded shadow-md right-20 top-12`}>
+                    <div id="menuDropdown" className={` absolute ${isExpanded ? '' : 'hidden'} bg-gray-50 p-4 rounded shadow-md right-20 top-12 z-10`}>
                         <ul className='px-4'>
                             <li>
                                 <button  onClick={() => {

@@ -8,10 +8,12 @@ import Modal from './Modal';
 import FilterByCategory from './FilterByCategory';
 import SortByPrice from './SortByPrice';
 import SearchProducts from './SearchProducts';
+import ShopProducts from './ShopProducts';
 export {
     Navbar, Hero,
     ServiceCard, Card,
     OffersSection, Footer,
     Modal, FilterByCategory,
-    SortByPrice , SearchProducts
+    SortByPrice, SearchProducts,
+    ShopProducts
 };

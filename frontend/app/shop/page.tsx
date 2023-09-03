@@ -1,9 +1,8 @@
 import Image from 'next/image'
 import React from 'react'
 import ProductImagePage from '../assets/images/bedroom.jpg';
-import { FilterByCategory, SortByPrice, SearchProducts, Card } from '@/components';
+import { FilterByCategory, SortByPrice, SearchProducts, Card, ShopProducts } from '@/components';
 import { Metadata } from 'next';
-import products from '../assets/data/products';
 
 export const metadata: Metadata = {
   title: 'shop',
@@ -39,19 +38,7 @@ const page = () => {
         </div>
       </div>
       <div className='mt-15'>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 container'>
-          {
-            products.map((item, index) =>
-              <Card
-                index={index}
-                productName={item.productName}
-                imgUrl={item.imgUrl}
-                category={item.category}
-                price={item.price}
-              />
-            )
-          }
-        </div>
+        <ShopProducts/>
 
       </div>
     </>

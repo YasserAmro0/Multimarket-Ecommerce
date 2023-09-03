@@ -15,7 +15,7 @@ const FilterByCategory = () => {
     const [selectedCategory, setSelectedCategory] = useState(Categories[0])
 
   return (
-      <div className="relative w-fit z-10">
+      <div className="relative w-fit z-20">
           <Listbox value={selectedCategory} onChange={setSelectedCategory}>
               <Listbox.Button className='relative w-full min-w-[127px] flex justify-between items-center cursor-default rounded-lg bg-[#0a1d37] py-2 px-3 text-left shadow-md sm:text-sm border text-white'>
                   {selectedCategory.name}
