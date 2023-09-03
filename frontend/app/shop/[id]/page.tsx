@@ -2,16 +2,19 @@ import React from 'react'
 import Image from 'next/image'
 import ImageBackground from '../../assets/images/ImageBackgound.jpg';
 import { ProductContent } from '@/components';
+import products from '@/app/assets/data/products';
 
 
-const page = () => {
+const page = ({ params }) => {
+  const NameProduct = products.find((product) => product.id === params.id);  
+
   return (
     <div>
       {/* Hero section */}
       <div>
         <div className=" ">
           <div className="absolute top-36 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-10">
-            <h1 className="text-white text-bold">Products</h1>
+            <h1 className="text-white text-bold">{NameProduct?.productName}</h1>
           </div>
           <div className="relative w-full h-48">
             <Image src={ImageBackground} className="w-full h-48 object-cover" alt="ProductPageImage" />
@@ -20,7 +23,7 @@ const page = () => {
         </div>
       </div>
       {/* content of product */}
-      <ProductContent/>
+      <ProductContent id={params.id} />
       
     </div>
   )
