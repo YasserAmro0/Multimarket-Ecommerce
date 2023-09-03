@@ -9,11 +9,12 @@ import FilterByCategory from './FilterByCategory';
 import SortByPrice from './SortByPrice';
 import SearchProducts from './SearchProducts';
 import ShopProducts from './ShopProducts';
+import { ProductContent } from './productsdetails';
 export {
     Navbar, Hero,
     ServiceCard, Card,
     OffersSection, Footer,
     Modal, FilterByCategory,
     SortByPrice, SearchProducts,
-    ShopProducts
+    ShopProducts, ProductContent
 };

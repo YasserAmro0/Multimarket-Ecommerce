@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import ImageBackground from '../../assets/images/ImageBackgound.jpg';
+import { ProductContent } from '@/components';
 
 
 const page = () => {
@@ -18,6 +19,9 @@ const page = () => {
           </div>
         </div>
       </div>
+      {/* content of product */}
+      <ProductContent/>
+      
     </div>
   )
 }

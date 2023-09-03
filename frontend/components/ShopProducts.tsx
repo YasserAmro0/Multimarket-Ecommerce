@@ -13,6 +13,7 @@ const ShopProducts = () => {
   return (
       <><div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 container'>
           {currentProducts.map((item, index) => <Card
+              id={item.id}
               index={index}
               productName={item.productName}
               imgUrl={item.imgUrl}
