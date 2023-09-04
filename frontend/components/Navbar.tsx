@@ -1,15 +1,18 @@
 "use client"
-
 import Link from 'next/link'
 import Image from 'next/image';
 import logoImage from '../app/assets/images/eco-logo.png';
 import { useState } from 'react';
-import  Modal  from './Modal';
+import Modal from './Modal';
+import { usePathname } from 'next/navigation';
+
 
 const Navbar = () => {
     const [isExpanded, toggleExpansion] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [isLoginPage, setLoginPage] = useState(false);
+    const pathname = usePathname();
+    
     const toggleMenu = () => {
         toggleExpansion(!isExpanded);
     };
@@ -33,13 +36,13 @@ const Navbar = () => {
                 {/* links  */}
                 <div className='flex justify-between'>
                     <ul className="flex space-x-8">
-                        <li>
+                        <li className={pathname === '/' ?'text-bold text-[#0A1D37]':''}>
                             <Link href='/'>Home</Link>
                         </li>
-                        <li>
+                        <li className={pathname === '/shop' ? 'text-bold text-[#0A1D37]' : ''}>
                             <Link href='/shop'>Shop</Link>
                         </li>
-                        <li>
+                        <li className={pathname === '/cart' ? 'text-bold text-[#0A1D37]' : ''}>
                             <Link href='/cart'>Cart</Link>
                         </li>
                     </ul>
@@ -52,10 +55,12 @@ const Navbar = () => {
                         <i className="ri-heart-line text-xl cursor-pointer"></i>
                         <div className="notification-circle ">0</div>
                     </div>
+                    <Link href="/cart">
                     <div className="icon-container relative">
-                        <i className="ri-shopping-cart-line text-xl cursor-pointer"></i>
-                        <div className="notification-circle">0</div>
-                    </div>
+                    <i className="ri-shopping-cart-line text-xl cursor-pointer"></i>
+                    <div className="notification-circle">0</div>
+                 </div>
+                    </Link>
                     <i className="ri-menu-line text-xl cursor-pointer" onClick={toggleMenu}></i>
                     <div id="menuDropdown" className={` absolute ${isExpanded ? '' : 'hidden'} bg-gray-50 p-4 rounded shadow-md right-20 top-12 z-10`}>
                         <ul className='px-4'>

@@ -13,6 +13,9 @@
   @apply absolute top-1 left-3 bg-[#0a1d37] text-white rounded-full p-2 text-xs w-4 h-4 flex items-center justify-center;
 }
 
+th {
+  @apply px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider;
+}
 
 /*  css variables */
 :root {
@@ -78,6 +81,6 @@ a {
   padding: 10px;
 }
 
-input{
-outline: none;
+input {
+  outline: none;
 }
