@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import ImageBackground from '../../assets/images/ImageBackgound.jpg';
+import ImageBackground from '../../../assets/images/ImageBackgound.jpg';
 import { ProductContent } from '@/components';
 import products from '@/app/assets/data/products';
 

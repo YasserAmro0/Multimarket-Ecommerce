@@ -1,10 +1,11 @@
-import { Card, Footer, Hero, OffersSection, ServiceCard } from "@/components";
+import { Card, Footer, Hero, Navbar, OffersSection, ServiceCard } from "@/components";
 import products from "./assets/data/products";
 
 
 const Home = () => {
     return (
         <>
+            <Navbar/>
             <div>
                 <Hero />
             </div>
@@ -69,6 +70,7 @@ const Home = () => {
                 </div>
 
             </div>
+            <Footer/>
         </>
 
     );

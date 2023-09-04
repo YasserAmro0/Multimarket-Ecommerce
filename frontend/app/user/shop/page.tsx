@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import ProductImagePage from '../assets/images/bedroom.jpg';
+import ProductImagePage from '../../assets/images/bedroom.jpg';
 import { FilterByCategory, SortByPrice, SearchProducts, Card, ShopProducts } from '@/components';
 import { Metadata } from 'next';
 

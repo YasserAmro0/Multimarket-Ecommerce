@@ -10,7 +10,7 @@ const Card = ({ productName, imgUrl, category, price,index,id }: ProductsProps) 
           <div className='container w-72 h-full shadow-lg p-4 relative' key={index}>
           <i className="ri-heart-fill text-2xl cursor-pointer absolute top-2
                 text-slate-400 hover:text-[#0A1D37] z-10"></i>
-          <Link href={`/shop/${id}`}>
+          <Link href={`/user/shop/${id}`}>
               <div className='transition-transform transform hover:scale-105'>
                   <Image
                       src={imgUrl}

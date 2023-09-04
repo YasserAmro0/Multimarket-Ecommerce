@@ -39,11 +39,11 @@ const Navbar = () => {
                         <li className={pathname === '/' ?'text-bold text-[#0A1D37]':''}>
                             <Link href='/'>Home</Link>
                         </li>
-                        <li className={pathname === '/shop' ? 'text-bold text-[#0A1D37]' : ''}>
-                            <Link href='/shop'>Shop</Link>
+                        <li className={pathname === '/user/shop' ? 'text-bold text-[#0A1D37]' : ''}>
+                            <Link href='/user/shop'>Shop</Link>
                         </li>
-                        <li className={pathname === '/cart' ? 'text-bold text-[#0A1D37]' : ''}>
-                            <Link href='/cart'>Cart</Link>
+                        <li className={pathname === '/user/cart' ? 'text-bold text-[#0A1D37]' : ''}>
+                            <Link href='/user/cart'>Cart</Link>
                         </li>
                     </ul>
                 </div>
@@ -55,12 +55,13 @@ const Navbar = () => {
                         <i className="ri-heart-line text-xl cursor-pointer"></i>
                         <div className="notification-circle ">0</div>
                     </div>
-                    <Link href="/cart">
+                    <Link href="/user/cart">
                     <div className="icon-container relative">
                     <i className="ri-shopping-cart-line text-xl cursor-pointer"></i>
                     <div className="notification-circle">0</div>
                  </div>
                     </Link>
+                    <Link href='/admin/dashboard' className='bg-[#0A1D37] rounded-full px-2 text-white'>Dashboard</Link>
                     <i className="ri-menu-line text-xl cursor-pointer" onClick={toggleMenu}></i>
                     <div id="menuDropdown" className={` absolute ${isExpanded ? '' : 'hidden'} bg-gray-50 p-4 rounded shadow-md right-20 top-12 z-10`}>
                         <ul className='px-4'>
