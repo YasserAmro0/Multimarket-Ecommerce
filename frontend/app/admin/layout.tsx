@@ -1,3 +1,4 @@
+import { Sidebar } from '@/components'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
@@ -14,7 +15,10 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
-                {children}
+                <div className="flex h-screen">
+                <Sidebar/>
+                    {children}
+                </div>
             </body>
         </html>
     )

@@ -11,6 +11,8 @@ import SearchProducts from './SearchProducts';
 import ShopProducts from './ShopProducts';
 import { ProductContent } from './productsdetails';
 import Table from './Table';
+import Sidebar from './Sidebar';
+import CustomTable from './CustomTable';
 export {
     Navbar, Hero,
     ServiceCard, Card,
@@ -18,5 +20,5 @@ export {
     Modal, FilterByCategory,
     SortByPrice, SearchProducts,
     ShopProducts, ProductContent,
-    Table
+    Table, Sidebar, CustomTable
 };

@@ -11,3 +11,41 @@ export const getTimeLeft = (targetDate: moment.Moment) => {
         seconds: duration.seconds()
     };
 };
+
+
+export const HeadersforProducts = [
+    {
+        title: 'Image',
+    },
+    {
+        title: 'Title',
+    },
+    {
+        title: 'Price',
+    },
+    {
+        title: 'Category',
+    },
+    {
+        title: 'Action',
+    }
+];
+
+export const HeadersforReviewers= [
+    {
+        title: 'Name',
+    },
+    {
+        title: 'Image Product',
+    },
+    {
+        title: 'Rating',
+    },
+    {
+        title: 'comment',
+    },
+    {
+        title: 'Action',
+    }
+
+]

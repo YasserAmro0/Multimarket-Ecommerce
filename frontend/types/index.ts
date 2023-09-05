@@ -29,3 +29,7 @@ export interface ModalProps {
 export interface SignUpAndLoginProps{
     setLoginPage: Dispatch<SetStateAction<boolean>>;
 }
+
+export interface HeadersProps {
+    title: string;
+}
