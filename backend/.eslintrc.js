@@ -23,5 +23,5 @@ module.exports = {
             "error"
         ]
     },
-    ignorePatterns: ["__tests__/*", "dist/*"],
+    ignorePatterns: ["__tests__/*", "dist/*", "src/migrations/*"],
 };

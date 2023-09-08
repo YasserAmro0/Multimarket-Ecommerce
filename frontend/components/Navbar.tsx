@@ -51,10 +51,7 @@ const Navbar = () => {
 
                 {/* Icons */}
                 <div className='flex justify-between space-x-4'>
-                    <div className="icon-container relative">
-                        <i className="ri-heart-line text-xl cursor-pointer"></i>
-                        <div className="notification-circle ">0</div>
-                    </div>
+   
                     <Link href="/user/cart">
                     <div className="icon-container relative">
                     <i className="ri-shopping-cart-line text-xl cursor-pointer"></i>
