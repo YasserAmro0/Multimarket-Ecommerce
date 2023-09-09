@@ -3,6 +3,7 @@ import express from 'express';
 import bearerToken from 'express-bearer-token';
 import morgan from 'morgan';
 import cors from 'cors';
+import { clientError, serverError } from './middlewares';
 // import router from './routes';
 
 dotenv.config();
@@ -15,10 +16,8 @@ app.use([
 app.use(bearerToken());
 app.use(morgan('dev'));
 // app.use('/api/v1', router);
-
-app.get('/api/v1', (req,res) => {
-    res.send('hello First App');
-})
+app.use(clientError);
+app.use(serverError);
 
 
 export default app;
