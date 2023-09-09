@@ -16,6 +16,13 @@ enum RolesForSelect {
     admin = 'admin',
 }
 
+interface IUser {
+    id: number | string;
+    password: string ;
+    username: string;
+    email: string;
+}
+
 export {
-    Decode, RequestWithUserRole, RolesForSelect, Roles,
+    Decode, RequestWithUserRole, RolesForSelect, Roles, IUser
 };

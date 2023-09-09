@@ -4,10 +4,12 @@ import bearerToken from 'express-bearer-token';
 import morgan from 'morgan';
 import cors from 'cors';
 import { clientError, serverError } from './middlewares';
-// import router from './routes';
+import router from './routes';
 
 dotenv.config();
 const app = express();
+app.use(express.json());
+
 app.use([
     cors(),
     express.json(),
@@ -15,7 +17,7 @@ app.use([
 ]);
 app.use(bearerToken());
 app.use(morgan('dev'));
-// app.use('/api/v1', router);
+app.use('/api/v1', router);
 app.use(clientError);
 app.use(serverError);
 
