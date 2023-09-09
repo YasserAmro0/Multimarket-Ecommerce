@@ -1,9 +1,9 @@
 import { CustomError, templateErrors } from './CustomError';
 import { generateToken, verifyToken } from './Jwt';
-import  UserRegisterSchema  from './validation/userSignup';
+import { userLoginSchema, userSignupSchema }  from './validation/';
 
 export {
     CustomError, templateErrors,
     generateToken, verifyToken,
-    UserRegisterSchema
+    userLoginSchema, userSignupSchema,
 }

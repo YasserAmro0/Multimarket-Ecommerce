@@ -1,2 +1,2 @@
-import {Signup} from './auth';
-export { Signup };
+import { Signup, LoginUserAdmin } from './auth';
+export { Signup, LoginUserAdmin };

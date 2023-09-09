@@ -1,9 +1,9 @@
 import { Response, NextFunction } from 'express';
 import { templateErrors, verifyToken } from '../helpers';
 
-import { Decode, RequestWithUserRole, Roles } from '../types';
+import { Decode, RequestWithUserRole,  } from '../types';
 
-const checkAuth = (role: Roles) => async (
+const checkAuth = () => async (
     req: RequestWithUserRole,
     res: Response,
     next: NextFunction,
@@ -13,9 +13,6 @@ const checkAuth = (role: Roles) => async (
         if (token) {
             const decoded = await verifyToken(token) as Decode;
             req.user = decoded;
-            if (decoded.role !== role) {
-                throw templateErrors.UNAUTHORIZED('Unauthorized');
-            }
             next();
         } else {
             throw templateErrors.UNAUTHORIZED('Unauthorized');
