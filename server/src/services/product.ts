@@ -1,18 +1,33 @@
-import { Db } from "mongodb";
 import { Product } from "../models"
 import { ProductType } from "../types";
+import { v2 as cloudinary } from 'cloudinary';
+import config from '../config';
+
+
+cloudinary.config({
+    cloud_name: config.CLOUDINARY_CLOUD_NAME,
+    api_key: config.CLOUDINARY_API_KEY,
+    api_secret: config.CLOUDINARY_API_SECRET,
+});
+
+const uploadImage = async (filePath: any) => {
+    const result = await cloudinary.uploader.upload(filePath);
+    return result;
+}
 
 const AddProduct = async ({
     title, price, category, description, shortDescription, imageurl
 }: ProductType) => {
- 
+    
+    const pathFile = imageurl; 
+    const cloudinaryResult = await uploadImage(pathFile);
     const product = new Product({
         title,
         price,
         category,
         description,
         shortDescription,
-        imageurl,
+        imageurl: cloudinaryResult.secure_url,
     });
     await product.save();
 
@@ -25,4 +40,5 @@ const GetProduct = async () => {
     return products;
 }
  
-export { AddProduct, GetProduct };
+
+export { AddProduct, GetProduct, uploadImage };

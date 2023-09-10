@@ -1,9 +1,9 @@
 import { NextFunction, Response, Request } from "express";
 import * as yup from 'yup';
-import { AddProduct, GetProduct } from '../services'
+import { AddProduct, GetProduct, uploadImage } from '../services'
 import { productSchema, templateErrors } from "../helpers";
 
-const addProductController = async (req: Request, res: Response, next: NextFunction)  => {
+const addProductController = async (req: Request, res: Response, next: NextFunction) => {
     const { body } = req;
     try {
         await productSchema.validate(body)
@@ -15,16 +15,16 @@ const addProductController = async (req: Request, res: Response, next: NextFunct
         }
         next(error);
     }
-    
-    
 }
 
 const getProductController = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const products = await GetProduct();
-        return res.status(201).json({ message: 'get Product successfully',data:{...products }});
+        return res.status(201).json({ message: 'get Product successfully', data: { ...products } });
     } catch (error) {
         next(error);
     }
 }
+
+
 export { addProductController, getProductController };
