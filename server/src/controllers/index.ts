@@ -1,2 +1,3 @@
 import { Signup, LoginUserAdmin } from './auth';
-export { Signup, LoginUserAdmin };
+import { addProductController, getProductController } from './product';
+export { Signup, LoginUserAdmin, addProductController, getProductController };

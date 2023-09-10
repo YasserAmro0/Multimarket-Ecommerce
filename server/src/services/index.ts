@@ -1,2 +1,3 @@
 import { Login, registerUser } from "./auth";
-export { Login, registerUser };
+import { AddProduct, GetProduct } from './product';
+export { Login, registerUser, AddProduct, GetProduct };

@@ -3,7 +3,6 @@ import * as yup from 'yup';
 import { generateToken, templateErrors, userLoginSchema, userSignupSchema } from "../helpers";
 import { registerUser, Login } from "../services";
 import bcrypt from 'bcrypt';
-import { IUser } from "../types";
 
 
 // signup
