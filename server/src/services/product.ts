@@ -2,6 +2,7 @@ import { Product } from "../models"
 import { ProductType } from "../types";
 import { v2 as cloudinary } from 'cloudinary';
 import config from '../config';
+import product from "../models/product";
 
 
 cloudinary.config({
@@ -21,7 +22,7 @@ const AddProduct = async ({
     
     const pathFile = imageurl; 
     const cloudinaryResult = await uploadImage(pathFile);
-    const product = new Product({
+    const productItem = ({
         title,
         price,
         category,
@@ -29,8 +30,8 @@ const AddProduct = async ({
         shortDescription,
         imageurl: cloudinaryResult.secure_url,
     });
-    await product.save();
-
+    await product.create(productItem);
+    
     return product;
 
 }
@@ -63,6 +64,7 @@ const GetProduct = async (filterCategory: string, name: string, minPrice: string
     if (filterCategory) {
         filter.category = filterCategory;
     }
+    
     const products = await Product.find(filter);
 
     return products;
