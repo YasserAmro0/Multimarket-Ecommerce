@@ -35,8 +35,36 @@ const AddProduct = async ({
 
 }
 
-const GetProduct = async () => {
-    const products = Product.find();
+const GetProduct = async (filterCategory: string, name: string, minPrice: string, maxPrice: string) => {
+
+    const filter: any = {};
+
+    if (minPrice  !== '' && maxPrice !== "") {
+        filter.price = {
+            $gt: minPrice,
+            $lte: maxPrice,
+        };
+    } else if (minPrice !== '') {
+        filter.price = {
+            $gte: minPrice,
+        };
+    } else if (maxPrice !== "") {
+        filter.price = {
+            $lte: maxPrice,
+        };
+    }
+    if (name) {
+        filter.title = {
+            $regex: name,
+            $options: 'i',
+        };
+    }
+
+    if (filterCategory) {
+        filter.category = filterCategory;
+    }
+    const products = await Product.find(filter);
+
     return products;
 }
  

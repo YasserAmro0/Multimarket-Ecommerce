@@ -9,4 +9,6 @@ interface ProductType{
     imageurl: String;
 }
 
+
+
 export default ProductType;

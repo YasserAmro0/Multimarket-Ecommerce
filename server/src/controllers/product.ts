@@ -19,7 +19,11 @@ const addProductController = async (req: Request, res: Response, next: NextFunct
 
 const getProductController = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const products = await GetProduct();
+        const {
+            q, filterCategory, minPrice, maxPrice,
+        } = req.query;
+        const products = await GetProduct(filterCategory as string, q as string, minPrice as string , maxPrice as string);
+        console.log(products,'contro')
         return res.status(201).json({ message: 'get Product successfully', data: { ...products } });
     } catch (error) {
         next(error);

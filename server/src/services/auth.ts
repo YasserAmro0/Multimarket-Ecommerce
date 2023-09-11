@@ -13,13 +13,13 @@ const registerUser = async ({
         throw templateErrors.BAD_REQUEST('User already exists. Please login instead.');
     }
     const hashedPassword = await bcrypt.hash(password, 12);
-    const user = new User({
-        username,
-        email,
+    const UserData= {
+        username: username,
+        email: email,
         password: hashedPassword,
-    });
-    await user.save();
-    return user;
+    };
+     await User.create(UserData);
+    return User;
 };
 
 
