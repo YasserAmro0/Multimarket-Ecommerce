@@ -21,6 +21,7 @@ const Signup = async (req: Request, res: Response, next: NextFunction) => {
 }
 
 
+
 // Login user and Admin
 const LoginUserAdmin = async (req: Request, res: Response, next: NextFunction) => { 
   
@@ -32,13 +33,13 @@ const LoginUserAdmin = async (req: Request, res: Response, next: NextFunction) =
         if (!user) {
             throw templateErrors.BAD_REQUEST('Wrong email or password');
         }
+        
         const passwordMatch = await bcrypt.compare(password, user.password);
         if (!passwordMatch) {
             throw templateErrors.BAD_REQUEST('Password does not match');
         }
-        const idUser = parseInt(user._id.toString(), 16);
         const token = await generateToken({
-            userId: idUser,
+            userId: user._id,
         });
 
         res.json({

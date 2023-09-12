@@ -1,5 +1,7 @@
+import { Types } from "mongoose";
+
 interface IPayload {
-    userId?: number;
+    userId?: Types.ObjectId;
     adminId?: number;
 }
 

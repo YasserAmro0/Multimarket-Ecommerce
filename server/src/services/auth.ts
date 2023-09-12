@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import { User } from "../models";
 import { IUser } from "../types";
 import { templateErrors } from '../helpers';
+import mongoose from 'mongoose';
 
 // RegisterUser
 const registerUser = async ({
@@ -13,7 +14,8 @@ const registerUser = async ({
         throw templateErrors.BAD_REQUEST('User already exists. Please login instead.');
     }
     const hashedPassword = await bcrypt.hash(password, 12);
-    const UserData= {
+    const UserData = {
+        _id: new mongoose.Types.ObjectId(),
         username: username,
         email: email,
         password: hashedPassword,

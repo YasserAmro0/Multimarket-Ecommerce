@@ -1,12 +1,12 @@
 import { Request } from 'express';
+import { Types } from 'mongoose';
 
 interface Decode {
-    adminId?: string;
-    userId?: string;
+    userId?: Types.ObjectId;
 }
-interface RequestWithUserRole extends Request {
-    user?: Decode,
-}
+// interface RequestWithUserRole extends Request {
+//     user?: Decode,
+// }
 
 interface IUser {
     id: number | string;
@@ -16,5 +16,5 @@ interface IUser {
 }
 
 export {
-    Decode, RequestWithUserRole, IUser
+    Decode, IUser
 };
