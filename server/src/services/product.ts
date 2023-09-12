@@ -3,6 +3,7 @@ import { ProductType } from "../types";
 import { v2 as cloudinary } from 'cloudinary';
 import config from '../config';
 import product from "../models/product";
+import { Types } from "mongoose";
 
 
 cloudinary.config({
@@ -70,5 +71,9 @@ const GetProduct = async (filterCategory: string, name: string, minPrice: string
     return products;
 }
  
+const getProductById = async (productId: Types.ObjectId) => {
+    let product = await Product.findById(productId);
+    return product;
+}
 
-export { AddProduct, GetProduct, uploadImage };
+export { AddProduct, GetProduct, uploadImage, getProductById };

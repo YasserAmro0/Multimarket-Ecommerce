@@ -1,7 +1,8 @@
 import { NextFunction, Response, Request } from "express";
 import * as yup from 'yup';
-import { AddProduct, GetProduct, uploadImage } from '../services'
+import { AddProduct, GetProduct, getProductById, uploadImage } from '../services'
 import { productSchema, templateErrors } from "../helpers";
+import mongoose from "mongoose";
 
 const addProductController = async (req: Request, res: Response, next: NextFunction) => {
     const { body } = req;
@@ -23,12 +24,30 @@ const getProductController = async (req: Request, res: Response, next: NextFunct
             q, filterCategory, minPrice, maxPrice,
         } = req.query;
         const products = await GetProduct(filterCategory as string, q as string, minPrice as string , maxPrice as string);
-        console.log(products,'contro')
         return res.status(201).json({ message: 'get Product successfully', data: { ...products } });
     } catch (error) {
         next(error);
     }
 }
 
+const getProductByIdController = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+       
+        const { productId } = req.params;
 
-export { addProductController, getProductController };
+        const objectIdProductId = new mongoose.Types.ObjectId(productId);
+
+        const product = await getProductById(objectIdProductId);
+
+        if (!product) {
+            throw templateErrors.BAD_REQUEST('Product not found');
+        }
+        return res.status(201).json({ message: 'show Product by id successfully', data: { product } });
+        
+    } catch (error) {
+        next(error);
+    }
+}
+
+
+export { addProductController, getProductController, getProductByIdController };

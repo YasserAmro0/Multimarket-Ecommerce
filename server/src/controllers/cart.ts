@@ -20,7 +20,6 @@ const getAllProductsInCart = async (req: RequestWithUserRole, res: Response, nex
     const userData = req.user;
     try {
         const products = await getAllCart(userData.userId);
-        console.log(products, 'hiii');
         return res.status(201).json({ message: "get all Product in Cart successfully", data: { ...products }});
 
     } catch (error) {
