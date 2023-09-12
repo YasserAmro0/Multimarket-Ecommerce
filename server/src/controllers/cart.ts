@@ -1,6 +1,6 @@
 import { NextFunction, Response, Request } from "express";
 import { Decode, RequestWithUserRole } from "../types";
-import { addToCart } from "../services";
+import { addToCart, getAllCart } from "../services";
 import mongoose, { Types } from "mongoose";
 
 const addToCartController = async (req: RequestWithUserRole, res: Response, next: NextFunction) => {
@@ -16,4 +16,17 @@ const addToCartController = async (req: RequestWithUserRole, res: Response, next
 
 }
 
-export default addToCartController;
+const getAllProductsInCart = async (req: RequestWithUserRole, res: Response, next: NextFunction) => {
+    const userData = req.user;
+    try {
+        const products = await getAllCart(userData.userId);
+        console.log(products, 'hiii');
+        return res.status(201).json({ message: "get all Product in Cart successfully", data: { ...products }});
+
+    } catch (error) {
+        next(error);
+    }
+    
+}
+
+export { addToCartController, getAllProductsInCart };

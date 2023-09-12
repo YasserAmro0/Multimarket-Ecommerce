@@ -1,5 +1,5 @@
 import { templateErrors } from "../helpers";
-import { User } from "../models";
+import { Product, User } from "../models";
 import { Cart } from "../models";
 import { Types } from "mongoose";
 
@@ -29,4 +29,29 @@ const addToCart = async (userId: Types.ObjectId, productId: Types.ObjectId , qua
 
 }
 
-export default addToCart;
+
+const getAllCart = async (userId: Types.ObjectId) => {
+    const userCart = await Cart.findOne({ user: userId });
+    if (!userCart) {
+        return [];
+    }
+    const cartItems = userCart.items;
+
+    const productsInCart = [];
+
+    for (const cartItem of cartItems) {
+        const productId = cartItem.productId;
+        const product = await Product.findById(productId);
+
+        if (product) {
+            productsInCart.push({
+                product,
+                quantity: cartItem.quantity,
+            });
+        }
+    }
+
+    return productsInCart;
+}
+
+export { addToCart, getAllCart };
