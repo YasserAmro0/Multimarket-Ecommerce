@@ -10,20 +10,20 @@ const Reviews = () => {
 
     return (
         <div>
-            <div className='mt-6'>
+            <div className='mt-6 bg-gray-100 p-5'>
                 <h3 className='text-bold'>UserName</h3>
                 <span className=' text-sm'>3.5 (Rating)</span>
-                <p className='w-85'>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <p className='w-85 text-slate-900'>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
             </div>
-            <div className='mt-6'>
+            <div className='mt-6 bg-gray-100 p-5'>
                 <h3 className='text-bold'>UserName</h3>
                 <span className=' text-sm'>3.5 (Rating)</span>
-                <p className='w-85'>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <p className='w-85 text-slate-900'>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
             </div>
 
-            <div className='mt-4 text-center'>
+            <div className='mt-10 text-center'>
                 <h2>Leave your experience </h2>
-                <span className='mt-4'>
+                <span className='mt-6'>
                     {[1, 2, 3, 4, 5].map((value) => (
                         <i
                             key={value}

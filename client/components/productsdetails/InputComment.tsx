@@ -14,7 +14,7 @@ const InputComment = () => {
                 value={review}
                 onChange={handleChange}
                 placeholder="Write your review here..."
-                className="h-48 p-2 border rounded-md w-full focus:outline-none mt-4" />
+                className="h-48 p-2 border rounded-md w-full focus:outline-none mt-6 border-gray-400" />
         </div>
             <div>
                 <button className='bg-[#0A1D37] hover:bg-blue-900 text-white font-bold py-2 px-4 rounded mt-6'>
