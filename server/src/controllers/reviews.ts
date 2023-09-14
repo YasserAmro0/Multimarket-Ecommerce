@@ -3,7 +3,7 @@ import * as yup from 'yup';
 import { Types } from "mongoose";
 import { RequestWithUserRole } from "../types";
 import { reviewsSchema, templateErrors } from "../helpers";
-import { addReviews, getAllReviewsForProduct } from "../services";
+import { addReviews, deleteReview, getAllReviewsForProduct, updateComment } from "../services";
 
 
 const addReviewsController = async (req: RequestWithUserRole, res: Response, next: NextFunction) => {
@@ -35,4 +35,30 @@ const getReviewsController = async (req: RequestWithUserRole, res: Response, nex
     }
     
 } 
-export { addReviewsController, getReviewsController };
+
+const updateCommentController = async (req: RequestWithUserRole, res: Response, next: NextFunction) => {
+    const userData = req.user; 
+    const { idReview }: { idReview: Types.ObjectId } = req.params;
+    const { newComment } = req.body;
+    try {
+        const reviewAfterUpdate = await updateComment(userData.userId, idReview, newComment);
+        return  res.status(201).json({ message:'update comment successfully ',data :reviewAfterUpdate});
+        
+    } catch (error) {
+        next(error);
+    }
+}
+
+const deleteReviewController = async (req: RequestWithUserRole, res: Response, next: NextFunction) => {
+    const { idReview }: { idReview: Types.ObjectId } = req.params;
+    try {
+        await deleteReview(idReview);
+        return res.status(201).json({ message: 'delete review successfully '});
+
+      
+    } catch (error) {
+        next(error);
+  }
+}
+
+export { addReviewsController, getReviewsController, updateCommentController, deleteReviewController };

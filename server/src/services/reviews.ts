@@ -1,6 +1,7 @@
 import { Types } from "mongoose";
 import { Reviews, User } from "../models";
 import reviews from "../types/reviews";
+import { templateErrors } from "../helpers";
 
 
 const addReviews = async (
@@ -45,4 +46,32 @@ const getAllReviewsForProduct = async (productId:Types.ObjectId) => {
     return reviewsWithUserName;
 }
 
-export  { addReviews, getAllReviewsForProduct };
+const updateComment = async (userId: string, idReview: Types.ObjectId, newComment: string) => {
+    
+    console.log(userId, 'userId');
+    const review = await Reviews.findById(idReview);
+
+    if (!review) {
+        throw templateErrors.NOT_FOUND('Comment not found');
+
+    }
+    const reviewId = review.userId.toString();
+    if (reviewId !== userId) {
+        throw templateErrors.UNAUTHORIZED("You can't edit this");
+    }
+    review.comment = newComment;
+    const afterUpdate = await review.save();
+    return afterUpdate;
+}
+
+const deleteReview = async (idReview: Types.ObjectId) => {
+    const afterDelete = await Reviews.deleteOne({ _id: idReview });
+    if (!afterDelete) {
+        throw templateErrors.NOT_FOUND('review not found');
+
+    }
+    return afterDelete;
+    
+}
+
+export { addReviews, getAllReviewsForProduct, updateComment, deleteReview };
