@@ -54,4 +54,17 @@ const getAllCart = async (userId: Types.ObjectId) => {
     return productsInCart;
 }
 
-export { addToCart, getAllCart };
+const deleteFromCart = async (userId: Types.ObjectId, productId: Types.ObjectId)  => {
+    const cart = await Cart.findOne({ user: userId });
+    console.log(userId, 'userId');
+    
+    if (!cart) {
+        throw templateErrors.NOT_FOUND('Cart not found');
+    }
+    const itemIndex = cart.items.findIndex((item) => item.productId == productId);
+    cart.items.splice(itemIndex, 1);
+    const cartAfterDelete = await cart.save();
+    return cartAfterDelete;
+}
+
+export { addToCart, getAllCart, deleteFromCart };
