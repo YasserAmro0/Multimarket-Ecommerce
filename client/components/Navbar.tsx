@@ -2,9 +2,10 @@
 import Link from 'next/link'
 import Image from 'next/image';
 import logoImage from '../app/assets/images/eco-logo.png';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Modal from './Modal';
 import { usePathname } from 'next/navigation';
+import  Axios  from 'axios';
 
 
 const Navbar = () => {
@@ -17,6 +18,7 @@ const Navbar = () => {
         toggleExpansion(!isExpanded);
     };
     
+  
     return (
         <div className='bg-gray-50  shadow-md'>
             <div className='container flex justify-between'>

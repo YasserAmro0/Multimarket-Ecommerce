@@ -6,12 +6,12 @@ export interface ReviewsProps {
     text: string;
 }
 export interface ProductsProps {
-    index: number
-    productName: string;
-    imgUrl: StaticImageData;
-    category: string;
-    price: number;
-    id: string;
+    index?: number
+    title?: string;
+    imageurl?: StaticImageData;
+    category?: string;
+    price?: number;
+    _id?: string;
     avgRating?: number;
     description?: string;
     shortDesc?: string;
@@ -32,4 +32,22 @@ export interface SignUpAndLoginProps{
 
 export interface HeadersProps {
     title: string;
+}
+
+export interface FilterShop{
+    selectedCategory?: string;
+    setSelectedCategory?: Dispatch<SetStateAction<string>>;
+    minPrice?: number;
+    setMinPrice?: Dispatch<SetStateAction<number>>;
+    maxPrice?: number;
+    setMaxPrice?: Dispatch<SetStateAction<number>>;
+    search?: string ;
+    setSearch?: Dispatch<SetStateAction<string>>;
+
+} 
+export interface FilterPriceProps {
+    minPrice: number;
+    setMinPrice: (value: number) => void;
+    maxPrice: number;
+    setMaxPrice: (value: number) => void;
 }

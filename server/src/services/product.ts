@@ -37,20 +37,20 @@ const AddProduct = async ({
 
 }
 
-const GetProduct = async (filterCategory: string, name: string, minPrice: string, maxPrice: string) => {
+const GetProduct = async (filterCategory: string, name: string, minPrice : number, maxPrice: number) => {
 
     const filter: any = {};
 
-    if (minPrice  !== '' && maxPrice !== "") {
+    if (minPrice !== 0 && maxPrice !== 0) {
         filter.price = {
             $gt: minPrice,
             $lte: maxPrice,
         };
-    } else if (minPrice !== '') {
+    } else if (minPrice !== 0) {
         filter.price = {
             $gte: minPrice,
         };
-    } else if (maxPrice !== "") {
+    } else if (maxPrice !== 0) {
         filter.price = {
             $lte: maxPrice,
         };

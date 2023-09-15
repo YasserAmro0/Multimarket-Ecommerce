@@ -23,8 +23,11 @@ const getProductController = async (req: Request, res: Response, next: NextFunct
         const {
             q, filterCategory, minPrice, maxPrice,
         } = req.query;
-        const products = await GetProduct(filterCategory as string, q as string, minPrice as string , maxPrice as string);
-        return res.status(201).json({ message: 'get Product successfully', data: { ...products } });
+        const parsedMinPrice = parseFloat(minPrice as string);
+        const parsedMaxPrice = parseFloat(maxPrice as string);
+
+        const products = await GetProduct(filterCategory as string, q as string, parsedMinPrice, parsedMaxPrice);
+        return res.status(201).json({ message: 'get Product successfully', data:  products });
     } catch (error) {
         next(error);
     }
@@ -42,7 +45,7 @@ const getProductByIdController = async (req: Request, res: Response, next: NextF
         if (!product) {
             throw templateErrors.BAD_REQUEST('Product not found');
         }
-        return res.status(201).json({ message: 'show Product by id successfully', data: { product } });
+        return res.status(201).json({ message: 'show Product by id successfully', data:  product  });
         
     } catch (error) {
         next(error);

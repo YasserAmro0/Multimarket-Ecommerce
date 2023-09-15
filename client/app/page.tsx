@@ -18,10 +18,10 @@ const Home = () => {
                 {
                         products.slice(10, 14).map((item, index) => 
                             <Card
-                            id={item.id}
+                            _id={item.id}
                             index={index}
-                            productName={item.productName}
-                            imgUrl={item.imgUrl}
+                            title={item.productName}
+                            imageurl={item.imageurl}
                             category={item.category}
                             price={item.price}
                         />
@@ -36,10 +36,10 @@ const Home = () => {
                 {
                         products.slice(0,8).map((item, index) => 
                             <Card
-                            id={item.id}
+                            _id={item.id}
                             index={index}
-                            productName={item.productName}
-                            imgUrl={item.imgUrl}
+                            title={item.title}
+                            iamgeurl={item.imgUrl}
                             category={item.category}
                             price={item.price}
                                 

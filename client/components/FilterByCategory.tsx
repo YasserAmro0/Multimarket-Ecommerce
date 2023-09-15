@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Listbox } from '@headlessui/react'
 import arrowImage from '../app/assets/images/chevron-up-down.svg';
 import Image from 'next/image';
-
+import { FilterShop } from '@/types';
 const Categories = [
     { id: 1, name: 'Filter By Category' },
     { id: 2, name: 'sofa' },
@@ -11,14 +11,14 @@ const Categories = [
     { id: 4, name: 'wireless' },
     { id: 5, name: 'chair' },
 ]
-const FilterByCategory = () => {
-    const [selectedCategory, setSelectedCategory] = useState(Categories[0])
 
+const FilterByCategory = ({ selectedCategory, setSelectedCategory }: FilterShop) => {
+    
   return (
       <div className="relative w-fit z-20">
           <Listbox value={selectedCategory} onChange={setSelectedCategory}>
               <Listbox.Button className='relative w-full min-w-[127px] flex justify-between items-center cursor-default rounded-lg bg-[#0a1d37] py-2 px-3 text-left shadow-md sm:text-sm border text-white'>
-                  {selectedCategory.name}
+                  {selectedCategory}
                   <Image
                       src={arrowImage}
                       width={20}

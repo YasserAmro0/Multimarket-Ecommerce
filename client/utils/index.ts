@@ -31,7 +31,7 @@ export const HeadersforProducts = [
     }
 ];
 
-export const HeadersforReviewers= [
+export const HeadersforReviewers = [
     {
         title: 'Name',
     },
@@ -48,4 +48,12 @@ export const HeadersforReviewers= [
         title: 'Action',
     }
 
-]
+];
+
+// export const fetchProduct = ({ search, minPrice, maxPrice, selectedCategory }: FilterShop) => {
+//     const res = await Axios.get(`
+//     http://localhost:8001/api/v1/product?q=${search}&filterCategory=${selectedCategory}&minPrice=${minPrice}&maxPrice=${maxPrice}
+//     `);
+//     console.log(res.data);
+//     return res.data;
+// }
