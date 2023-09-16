@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 }
 
 const page = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("Filter By Category");
   const [minPrice, setMinPrice] = useState<number>(0);
   const [maxPrice, setMaxPrice] = useState<number>(0);
   const [search, setSearch] = useState<string>("");

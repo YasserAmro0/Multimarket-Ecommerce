@@ -13,6 +13,7 @@ import { ProductContent } from './productsdetails';
 import Table from './Table';
 import Sidebar from './Sidebar';
 import CustomTable from './CustomTable';
+import FormAddProduct from './FormAddProduct'
 export {
     Navbar, Hero,
     ServiceCard, Card,
@@ -20,5 +21,6 @@ export {
     Modal, FilterByCategory,
     SortByPrice, SearchProducts,
     ShopProducts, ProductContent,
-    Table, Sidebar, CustomTable
+    Table, Sidebar, CustomTable,
+    FormAddProduct
 };

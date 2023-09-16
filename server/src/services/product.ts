@@ -6,6 +6,7 @@ import product from "../models/product";
 import { Types } from "mongoose";
 
 
+
 cloudinary.config({
     cloud_name: config.CLOUDINARY_CLOUD_NAME,
     api_key: config.CLOUDINARY_API_KEY,
@@ -20,9 +21,7 @@ const uploadImage = async (filePath: any) => {
 const AddProduct = async ({
     title, price, category, description, shortDescription, imageurl
 }: ProductType) => {
-    
-    const pathFile = imageurl; 
-    const cloudinaryResult = await uploadImage(pathFile);
+    const cloudinaryResult = await uploadImage(imageurl);
     const productItem = ({
         title,
         price,
@@ -62,7 +61,7 @@ const GetProduct = async (filterCategory: string, name: string, minPrice : numbe
         };
     }
 
-    if (filterCategory) {
+    if (filterCategory && filterCategory !== "Filter By Category") {
         filter.category = filterCategory;
     }
     

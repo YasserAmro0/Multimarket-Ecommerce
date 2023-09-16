@@ -7,9 +7,12 @@ module.exports = {
 
     // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/tw-elements/dist/js/**/*.js"
   ],
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("tw-elements/dist/plugin.cjs")],
+  darkMode: "class"
+
 }

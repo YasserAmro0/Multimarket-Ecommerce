@@ -10,8 +10,8 @@ dotenv.config();
 const app = express();
 app.use([
     cors(),
-    express.json(),
-    express.urlencoded({ extended: true }),
+    express.json({ limit: '10mb' }),
+    express.urlencoded({ limit: '10mb', extended: true }),
 ]);
 app.use(bearerToken());
 app.use(morgan('dev'));

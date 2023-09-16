@@ -5,15 +5,17 @@ import arrowImage from '../app/assets/images/chevron-up-down.svg';
 import Image from 'next/image';
 import { FilterShop } from '@/types';
 const Categories = [
-    { id: 1, name: 'Filter By Category' },
-    { id: 2, name: 'sofa' },
-    { id: 3, name: 'mobile' },
-    { id: 4, name: 'wireless' },
-    { id: 5, name: 'chair' },
+    { name: 'Filter By Category' },
+    {  name: 'sofa' },
+    {  name: 'mobile' },
+    {  name: 'wireless' },
+    {  name: 'chair' },
 ]
-
 const FilterByCategory = ({ selectedCategory, setSelectedCategory }: FilterShop) => {
-    
+
+    const handleCategorySelect = (category: string) => {
+        setSelectedCategory?.(category);
+}
   return (
       <div className="relative w-fit z-20">
           <Listbox value={selectedCategory} onChange={setSelectedCategory}>
@@ -30,8 +32,9 @@ const FilterByCategory = ({ selectedCategory, setSelectedCategory }: FilterShop)
               <Listbox.Options className='absolute mt-1 max-h-60 w-full overflow-auto rounded-md text-white bg-[#0a1d37] py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
                   {Categories.map((category) => (
                       <Listbox.Option
-                          key={category.id}
-                          value={category}
+                          key={`${category.name}`}
+                          value={category.name}
+                          onChange={() => handleCategorySelect(category.name)}
                           className={({ active, selected }) =>
                               `relative cursor-default select-none py-2 px-4 text-white ui-active:text-white ui-not-active:bg-white ui-not-active:text-black  ${active ? "bg-blue-600" : "bg-[#0a1d37]"
                               }`
