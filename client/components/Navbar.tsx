@@ -5,20 +5,35 @@ import logoImage from '../app/assets/images/eco-logo.png';
 import { useEffect, useState } from 'react';
 import Modal from './Modal';
 import { usePathname } from 'next/navigation';
-import  Axios  from 'axios';
+import axiosInstance from '@/utils/api/axios';
 
 
 const Navbar = () => {
     const [isExpanded, toggleExpansion] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [isLoginPage, setLoginPage] = useState(false);
+    const [isLogin, setIsLogin] = useState(false);
+
     const pathname = usePathname();
-    
+
+    const handleLogout = () => {
+        localStorage.removeItem('access_token');
+        setIsLogin(false);
+    }
+   
+    useEffect(() => {
+        const getUserData =  async() => {
+            const response = await axiosInstance.get('/auth');
+            if (response.data.username) {
+                setIsLogin(true);
+            }
+        }
+        getUserData();
+    },[])
     const toggleMenu = () => {
         toggleExpansion(!isExpanded);
     };
     
-  
     return (
         <div className='bg-gray-50  shadow-md'>
             <div className='container flex justify-between'>
@@ -49,7 +64,7 @@ const Navbar = () => {
                         </li>
                     </ul>
                 </div>
-
+                
 
                 {/* Icons */}
                 <div className='flex justify-between space-x-4'>
@@ -60,35 +75,42 @@ const Navbar = () => {
                     <div className="notification-circle">0</div>
                  </div>
                     </Link>
-                    <Link href='/admin/dashboard' className='bg-[#0A1D37] rounded-full px-2 text-white'>Dashboard</Link>
-                    <i className="ri-menu-line text-xl cursor-pointer" onClick={toggleMenu}></i>
-                    <div id="menuDropdown" className={` absolute ${isExpanded ? '' : 'hidden'} bg-gray-50 p-4 rounded shadow-md right-20 top-12 z-10`}>
+                    {isLogin ?
+                        <button onClick={handleLogout}>
+                            <i className="ri-logout-box-r-line  cursor-pointer"> Logout</i>
+                        </button> :
+                        <><i className="ri-menu-line text-xl cursor-pointer" onClick={toggleMenu}></i><div id="menuDropdown" className={` absolute ${isExpanded ? '' : 'hidden'} bg-gray-50 p-4 rounded shadow-md right-20 top-12 z-10`}>
                         <ul className='px-4'>
                             <li>
-                                <button  onClick={() => {
-                                    setIsOpen(true)
-                                    setLoginPage(true);
-                                }}>
+                                <button onClick={() => {
+                                    setIsOpen(true);
+                                        setLoginPage(true);
+                                        toggleExpansion(false);
+                                } }>
                                     Login
                                 </button>
                             </li>
                             <li className='border-t-2 w-full'>
-                                <button  onClick={() => {
-                                    setIsOpen(true)
-                                    setLoginPage(false);
-                                }}>
+                                <button onClick={() => {
+                                    setIsOpen(true);
+                                        setLoginPage(false);
+                                        toggleExpansion(false);
+                                } }>
                                     SignUp
                                 </button>
                             </li>
                         </ul>
-                    </div>
+                    </div></>}
+                    {/* <Link href='/admin/dashboard' className='bg-[#0A1D37] rounded-full px-2 text-white'>Dashboard</Link> */}
                 </div>
             </div>
+            
             <Modal
                 isOpen={isOpen}
                 closeModel={() => setIsOpen(false)} 
                 isLoginPage={isLoginPage}
                 setLoginPage={setLoginPage}
+                setIsOpen={setIsOpen}
             />
 
         </div>

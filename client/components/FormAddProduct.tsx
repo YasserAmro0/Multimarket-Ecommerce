@@ -106,7 +106,7 @@ const FormAddProduct = () => {
                          bg-gray-200 border border-gray-200
                           text-gray-700 py-3 px-4 pr-8 rounded
                           leading-tight focus:outline-none focus:bg-white
-                           focus:border-gray-500" id="grid-state"
+                           focus:border-gray-500 mb-5" id="grid-state"
                             value={category}
                             onChange={handleCategoryChange}
                         >
@@ -132,7 +132,7 @@ const FormAddProduct = () => {
                         onChange={handleImageChange}
 
                     />
-                    <button className={`bg-${loading ? 'gray-400' : 'blue-900'} text-white font-bold py-2 px-4 rounded mt-6`}
+                    <button className={`bg-blue-900 text-white font-bold py-2 px-4 rounded mt-6`}
                         disabled={loading}
                     >
                         {loading ? 'Adding...' : 'Add Product'}

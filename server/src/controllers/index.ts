@@ -1,4 +1,4 @@
-import { Signup, LoginUserAdmin } from './auth';
+import { Signup, LoginUserAdmin, getAuth } from './auth';
 import { addProductController, getProductController, getProductByIdController } from './product';
 import { addToCartController, getAllProductsInCart, deleteFromCartController } from './cart';
 import { addReviewsController, getReviewsController, updateCommentController, deleteReviewController } from './reviews';

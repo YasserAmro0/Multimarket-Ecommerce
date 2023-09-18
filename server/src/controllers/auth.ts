@@ -3,6 +3,8 @@ import * as yup from 'yup';
 import { generateToken, templateErrors, userLoginSchema, userSignupSchema } from "../helpers";
 import { registerUser, Login } from "../services";
 import bcrypt from 'bcrypt';
+import { RequestWithUserRole } from "../types";
+import { User } from "../models";
 
 
 // signup
@@ -36,10 +38,11 @@ const LoginUserAdmin = async (req: Request, res: Response, next: NextFunction) =
         
         const passwordMatch = await bcrypt.compare(password, user.password);
         if (!passwordMatch) {
-            throw templateErrors.BAD_REQUEST('Password does not match');
+            throw templateErrors.BAD_REQUEST('Password  Wrong try again');
         }
         const token = await generateToken({
             userId: user._id,
+            isLogin:true,
         });
 
         res.json({
@@ -53,4 +56,41 @@ const LoginUserAdmin = async (req: Request, res: Response, next: NextFunction) =
         next(err);
     }
 }
-export { Signup, LoginUserAdmin };
+
+const getAuth = async (req: RequestWithUserRole, res: Response, next: NextFunction) => {
+    let data;
+    const user = req.user;
+    try {
+        const userData = await User.findById(user.userId).select("username");
+        data = userData;
+        res.json({
+            message: 'success',
+            data, 
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+
+
+const LoginAdmin = async (req: Request, res: Response, next: NextFunction) => {
+    const { email, password } = req.body;
+    try {
+        if (email !== "admin@gmail.com") {
+            throw templateErrors.BAD_REQUEST('Email  Wrong try again');
+        }
+        if (password !== "admin") {
+            throw templateErrors.BAD_REQUEST('Password  Wrong try again');
+        }
+
+        res.json({
+            message: 'Admin logged in successfully',
+            data: { role: "admin" },
+        });
+    } catch (error) {
+        next(error);
+    }
+
+    
+}
+export { Signup, LoginUserAdmin, getAuth };

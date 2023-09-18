@@ -1,50 +1,145 @@
-import { SignUpAndLoginProps } from "@/types";
-import {
-    Card,
-    Button,
-    Typography,
-} from "@material-tailwind/react";
+'use client';
+import { SignUpProps } from "@/types";
+import { Button, Label, TextInput } from 'flowbite-react';
+import Image from "next/image";
+import logoImage from '../app/assets/images/eco-logo.png'
+import axiosInstance from "@/utils/api/axios";
+import { useState } from "react";
+import { AxiosError } from "axios";
+import {toast } from "react-toastify";
 
-const SignUp = ({ setLoginPage }: SignUpAndLoginProps)=> {
+
+const SignUp = ({ setLoginPage }: SignUpProps) => {
+    const [loading, setLoading] = useState(false); 
+    const [errorMessage, setErrorMessage] = useState('');
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [usernameError, setUsernameError] = useState('');
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+
+    const handleUserName = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setUsername(e.target.value);
+        setUsernameError('');
+    }
+    const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPassword(e.target.value);
+        setPasswordError('');
+    }
+    const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.target.value);
+        setEmailError('');  
+    }
+    const SignUpPost = async () => {
+        try {
+            setErrorMessage('');
+            setLoading(true);
+            await axiosInstance.post('/auth/signup', {
+                username,
+                email,
+                password,
+            });
+            
+            setLoading(false);
+            toast.success("Sign up  successfully 🎉");
+            setLoginPage(true);
+        } catch (error) {
+            const err = error as AxiosError;
+            setLoading(false);
+            setErrorMessage(err.message);
+
+            if (err.message.includes('username')) {
+                setUsernameError(err.message);
+            }
+
+            if (err.message.includes('Email') || err.message.includes('already')) {
+                setEmailError(err.message);
+            }
+
+            if (err.message.includes('Password')) {
+                setPasswordError(err.message);
+            }
+           
+        } 
+    }
+    
     return (
-        <Card color="transparent" shadow={false}>
-            <Typography variant="h4" color="blue-gray">
-                Sign Up
-            </Typography>
-            <Typography color="gray" className="mt-1 font-normal">
-                Enter your details to register.
-            </Typography>
-            <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
-                <div className="mb-4 flex flex-col gap-2">
-                    <div className="flex flex-col">
-                        <label className="text-gray-600 mb-1">Name</label>
-                        <input type="text" className="custom-border py-2 px-3 border rounded" />
-                    </div>
-                    <div className="flex flex-col">
-                        <label className="text-gray-600 mb-1">Email</label>
-                        <input type="email" className="custom-border py-2 px-3 border rounded" />
-                    </div>
-                    <div className="flex flex-col">
-                        <label className="text-gray-600 mb-1">Password</label>
-                        <input type="password" className="custom-border py-2 px-3 border rounded" />
-                    </div>
-                    <div className="flex flex-col">
-                        <label className="text-gray-600 mb-1"> Confirm Password</label>
-                        <input type="password" className="custom-border py-2 px-3 border rounded" />
-                    </div>
-                </div>
+       
+        <div className="flex flex-col items-center">
+            
+            <div className="mb-4">
+                <Image src={logoImage} alt="Logo" className="w-12 h-12" />
+            </div>
+            <h1 className="text-2xl font-bold mb-4">Sign Up</h1>
+            <form className="max-w-md flex flex-col gap-4">
                 
-                <Button className="mt-6 py-2" fullWidth>
-                    Register
+                <div className="w-80">
+                    <div className="mb-2 block">
+                        <Label
+                            htmlFor="username"
+                            value="Your Name"
+                        />
+                    </div>
+                    <TextInput
+                        id="username"
+                        placeholder="your name"
+                        required
+                        type="text"
+                        color={usernameError ?'failure' :''}
+                        helperText={<><span className="font-medium"></span>{usernameError}</>}
+                        onChange={handleUserName}
+
+                    />
+                </div>
+                <div className=" w-80">
+                    <div className="mb-2 block">
+                        <Label
+                            htmlFor="email1"
+                            value="Email"
+                        />
+                    </div>
+                    <TextInput
+                        id="email1"
+                        placeholder="name@gmail.com"
+                        required
+                        type="email"
+                        color={emailError ? 'failure' : ''}
+                        helperText={<><span className="font-medium"></span>{emailError}</>}
+                        onChange={handleEmail}
+                    />
+                </div>
+                <div>
+                    <div className="mb-2 block">
+                        <Label
+                            htmlFor="password1"
+                            value="Password"
+                        />
+                    </div>
+                    <TextInput
+                        id="password1"
+                        required
+                        type="password"
+                        placeholder="***************"
+                        color={passwordError ? 'failure' : ''}
+                        helperText={<><span className="font-medium"></span>{passwordError}</>}
+                        onChange={handlePassword}
+                    />
+                </div>
+                <Button
+                    type="submit"
+                    className="bg-[#0A1D37]"
+                    onClick={SignUpPost} 
+                    disabled={loading} 
+                >
+                    {loading ? 'Signing up...' : 'Sign up'}
                 </Button>
-                <Typography color="gray" className="mt-4 text-center font-normal">
-                    Already have an account?{" "}
-                    <button  className="font-medium text-gray-900" onClick={() => setLoginPage(true)}>
-                        Sign In
-                    </button>
-                </Typography>
             </form>
-        </Card>
+            <p className="mt-4">
+                Already have an account?
+                <button onClick={() => setLoginPage(true)} className="text-blue-500 underline">Login</button>
+            </p>
+        </div>
     );
 }
 

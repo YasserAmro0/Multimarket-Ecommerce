@@ -1,3 +1,4 @@
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { StaticImageData } from "next/image";
 import { Dispatch, SetStateAction } from "react";
 
@@ -8,13 +9,13 @@ export interface ReviewsProps {
 export interface ProductsProps {
     index?: number
     title?: string;
-    imageurl?: StaticImageData;
+    imageurl?: string | StaticImport;
     category?: string;
     price?: number;
     _id?: string;
     avgRating?: number;
     description?: string;
-    shortDesc?: string;
+    shortDescription?: string;
     reviews?: ReviewsProps[];
 }
 
@@ -24,10 +25,16 @@ export interface ModalProps {
     closeModel: () => void;
     isLoginPage: boolean;
     setLoginPage: Dispatch<SetStateAction<boolean>>;
+    setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export interface SignUpAndLoginProps{
+export interface SignUpProps{
     setLoginPage: Dispatch<SetStateAction<boolean>>;
+}
+
+export interface LoginProps{
+    setLoginPage: Dispatch<SetStateAction<boolean>>;
+    setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface HeadersProps {

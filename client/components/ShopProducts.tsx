@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Card from './Card'
 import Image from 'next/image'
 import { FilterShop } from '@/types';
-import noDataFound from '../app/assets/images/nodata.png';
+import noDataFound from '../app/assets/images/sorry.png';
 import axiosInstance from '@/utils/api/axios';
 
 const ShopProducts = ({search,minPrice,maxPrice,selectedCategory}:FilterShop) => {

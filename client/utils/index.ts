@@ -1,4 +1,5 @@
 import moment from 'moment';
+import axiosInstance from './api/axios';
 
 export const getTimeLeft = (targetDate: moment.Moment) => {
     const now = moment();
@@ -50,10 +51,3 @@ export const HeadersforReviewers = [
 
 ];
 
-// export const fetchProduct = ({ search, minPrice, maxPrice, selectedCategory }: FilterShop) => {
-//     const res = await Axios.get(`
-//     http://localhost:8001/api/v1/product?q=${search}&filterCategory=${selectedCategory}&minPrice=${minPrice}&maxPrice=${maxPrice}
-//     `);
-//     console.log(res.data);
-//     return res.data;
-// }

@@ -1,10 +1,12 @@
 import { Card, Footer, Hero, Navbar, OffersSection, ServiceCard } from "@/components";
 import products from "./assets/data/products";
+import { ToastContainer } from "react-toastify";
 
 
 const Home = () => {
     return (
         <>
+            <ToastContainer />
             <Navbar/>
             <div>
                 <Hero />
