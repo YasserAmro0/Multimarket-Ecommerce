@@ -1,15 +1,14 @@
 "use client"
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Image from 'next/image';
 import Reviews from './Reviews';
 import imageNoProduct from '../../app/assets/images/no-products.jpg'
-import { ProductsProps } from '@/types';
+import { ProductsProps, ReviewsType } from '@/types';
 import { userDataContext } from '@/context';
 import Modal from '../Modal';
 import { ToastContainer, toast } from 'react-toastify';
 import axiosInstance from '@/utils/api/axios';
 import { usePathname } from 'next/navigation';
-import { AxiosError } from 'axios';
 
 
 
@@ -19,8 +18,9 @@ const ProductContent = ({ product }: {product: ProductsProps }) => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isLoginPage, setIsLoginPage] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const pathname = usePathname();
+  const [reviews, setReviews] = useState<ReviewsType[]>([]);
 
+  const pathname = usePathname();
 
   const userContext = useContext(userDataContext);
 
@@ -37,9 +37,24 @@ const ProductContent = ({ product }: {product: ProductsProps }) => {
       await axiosInstance.post(`cart/addToCart/${id}`, {
         quantity: parseInt(`${quantity}`),
       });
-      toast.success('add to cart successfully 🎉')
-      setIsLoading(false);
+    toast.success('add to cart successfully 🎉');
+    setIsLoading(false);
+    
   }
+
+
+  const fetchReviews = async () => {
+    const pathnameParts = pathname.split('/');
+    const id = pathnameParts[pathnameParts.length - 1];
+    try {
+      setIsLoading(true);
+      const response = await axiosInstance.get(`review/${id}`);
+      setReviews(response.data);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
+  };
 
   if (!product) {
     return <div className='flex justify-center'>
@@ -123,13 +138,18 @@ const ProductContent = ({ product }: {product: ProductsProps }) => {
             <button
               className={!isDescription ? 'text-[#0A1D37] text-bold' : ''}
               onClick={() => setIsDescription(false)}>
-              Reviews (2)
+              Reviews ({reviews.length})
             </button>
           </div>
           {/* description or reviews */}
           <div className='mt-4'>
             {
-              isDescription ? <p>{product.description}</p> : <Reviews />
+              isDescription ? <p>{product.description}</p>
+                : <Reviews
+                  fetchReviews={fetchReviews}
+                  reviews={reviews}
+                  isLoading={isLoading}
+                />
             }
 
           </div>

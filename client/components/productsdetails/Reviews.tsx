@@ -4,16 +4,13 @@ import InputComment from './InputComment';
 import { userDataContext } from '@/context';
 import axiosInstance from '@/utils/api/axios';
 import { usePathname } from 'next/navigation';
-import { ReviewsType } from '@/types';
+import { ReviewComType, ReviewsType } from '@/types';
 import { toast } from 'react-toastify';
 import EditComment from './EditeComment';
 
-const Reviews = () => {
+const Reviews = ({ fetchReviews, isLoading, reviews }: ReviewComType) => {
     const [rating, setRating] = useState(0);
-    const [reviews, setReviews] = useState<ReviewsType[]>([]);
-    const [loading, setLoading] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
-    const pathname = usePathname();
     const userContext = useContext(userDataContext);
     const handleEditClick = () => {
         setIsEditing(true);
@@ -29,39 +26,16 @@ const Reviews = () => {
         fetchReviews();
     }
 
+
     useEffect(() => {
-        const pathnameParts = pathname.split('/');
-        const id = pathnameParts[pathnameParts.length - 1];
-        const getData = async () => {
-            try {
-                setLoading(true);
-                const response = await axiosInstance.get(`review/${id}`);
-                setReviews(response.data);
-                setLoading(false);
-            } catch (error) {
-                setLoading(false);
-            }
-            
-        }
-        getData();
+        fetchReviews();
     }, []);
 
-    const fetchReviews = async () => {
-        const pathnameParts = pathname.split('/');
-        const id = pathnameParts[pathnameParts.length - 1];
-        try {
-            setLoading(true);
-            const response = await axiosInstance.get(`review/${id}`);
-            setReviews(response.data);
-            setLoading(false);
-        } catch (error) {
-            setLoading(false);
-        }
-    };
+  
 
     return (
         <>
-            {loading ? (
+            {isLoading ? (
                 <div className="text-center">
                     <div className="spinner_status" role="status">
                         <span className="spinner_loading">Loading...</span>
@@ -79,7 +53,7 @@ const Reviews = () => {
                             <div>
                                 <h3 className='text-bold'><i className="ri-user-fill"></i> {review.username}</h3>
                                 <span className='text-[14px]'>{review.rating}/5  <i className='ri-star-fill pr-2 text-yellow-500'></i>(Rating)</span>
-                                {isEditing ? (
+                                {isEditing && userContext?.userData?._id === review.userId ? (
                                     <EditComment
                                         commentForEdit={review.comment}
                                         setIsEditing={setIsEditing}
@@ -91,7 +65,7 @@ const Reviews = () => {
                                 )}
                 
                             </div>
-                            {userContext?.userData && (
+                            {userContext?.userData?._id === review.userId && (
                                 <div className='text-xl cursor-pointer'>
                                     <i
                                         className="ri-delete-bin-6-line pr-2 text-red-700"

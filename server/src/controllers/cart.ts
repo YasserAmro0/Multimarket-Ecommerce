@@ -18,10 +18,9 @@ const addToCartController = async (req: RequestWithUserRole, res: Response, next
 
 const getAllProductsInCart = async (req: RequestWithUserRole, res: Response, next: NextFunction) => {
     const userData = req.user;
-    console.log(userData.userId)
     try {
         const products = await getAllCart(userData.userId);
-        return res.status(201).json({ message: "get all Product in Cart successfully", data: { ...products }});
+        return res.status(201).json({ message: "get all Product in Cart successfully", data: products });
 
     } catch (error) {
         next(error);
@@ -31,7 +30,6 @@ const getAllProductsInCart = async (req: RequestWithUserRole, res: Response, nex
 
 const deleteFromCartController = async (req: RequestWithUserRole, res: Response, next: NextFunction) => {
     const userData = req.user;
-    console.log(userData);
     const { productId }: { productId: Types.ObjectId } = req.params;
 
     try {

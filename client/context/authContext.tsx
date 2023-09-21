@@ -12,6 +12,7 @@ const AuthContext: React.FC<AppContextProps> = ({ children }) => {
     const [userChange, setUserChange] = useState<boolean>(true);
 
     useEffect(() => {
+
         const getUserData = async () => {
             try {
                 setLoading(true);
@@ -27,7 +28,7 @@ const AuthContext: React.FC<AppContextProps> = ({ children }) => {
 
     const contextValue = useMemo(() => ({
         userData, setUserData, userChange, setUserChange
-    }), [userData, setUserData, userChange, setUserChange, ]);
+    }), [userData, setUserData, userChange, setUserChange ]);
 
     if (loading) {
         return (

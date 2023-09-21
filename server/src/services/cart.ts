@@ -44,10 +44,17 @@ const getAllCart = async (userId: Types.ObjectId) => {
         const product = await Product.findById(productId);
 
         if (product) {
-            productsInCart.push({
-                product,
-                quantity: cartItem.quantity,
-            });
+            const existingProductIndex = productsInCart.findIndex(item => item.product._id.toString() === productId.toString());
+
+            if (existingProductIndex !== -1) {
+
+                productsInCart[existingProductIndex].quantity += cartItem.quantity;
+            } else {
+                productsInCart.push({
+                    product,
+                    quantity: cartItem.quantity,
+                });
+            }
         }
     }
 
@@ -56,8 +63,6 @@ const getAllCart = async (userId: Types.ObjectId) => {
 
 const deleteFromCart = async (userId: Types.ObjectId, productId: Types.ObjectId)  => {
     const cart = await Cart.findOne({ user: userId });
-    console.log(userId, 'userId');
-    
     if (!cart) {
         throw templateErrors.NOT_FOUND('Cart not found');
     }

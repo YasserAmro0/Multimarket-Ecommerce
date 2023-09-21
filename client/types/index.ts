@@ -59,7 +59,8 @@ export interface FilterPriceProps {
 }
 
 export interface UserData {
-    username?: string
+    username?: string;
+    _id?: string;
 }
 export interface AppContextProps {
     children: React.ReactNode;
@@ -92,5 +93,30 @@ export interface CommentEditType{
     commentForEdit: string;
     setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
     idReview: string;
+    fetchReviews: () => Promise<void>;
+}
+export interface ProductCartType {
+    product: {
+        _id: string;
+        category: string;
+        description: string;
+        imageurl: string;
+        price: number;
+        shortDescription: string;
+        title: string;
+        // Add more properties if needed
+    };
+    quantity: number;
+}
+
+export interface TableCartType{
+    getData: () => Promise<void>;
+    loading: boolean;
+    cartData: ProductCartType[];
+}
+
+export interface ReviewComType{
+    reviews: ReviewsType[];
+    isLoading: boolean;
     fetchReviews: () => Promise<void>;
 }

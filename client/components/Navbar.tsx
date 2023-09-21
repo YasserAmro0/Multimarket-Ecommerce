@@ -13,6 +13,7 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isLoginPage, setLoginPage] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
+
     const userContext = useContext(userDataContext);
     const router = useRouter()
     const pathname = usePathname();
@@ -26,6 +27,7 @@ const Navbar = () => {
     const toggleMenu = () => {
         toggleExpansion(!isExpanded);
     };
+
     
     return (
         <div className='bg-gray-50  shadow-md'>
@@ -65,7 +67,7 @@ const Navbar = () => {
                     <Link href="/user/cart">
                     <div className="icon-container relative">
                     <i className="ri-shopping-cart-line text-xl cursor-pointer"></i>
-                    <div className="notification-circle">0</div>
+                            <div className="notification-circle">{0}</div>
                  </div>
                     </Link>
                     {userContext?.userData ?
