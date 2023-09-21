@@ -1,10 +1,14 @@
 
 import { Card, Footer, Hero, Navbar, OffersSection, ServiceCard } from "@/components";
-import products from "./assets/data/products";
 import { ToastContainer } from "react-toastify";
+import axios from "axios";
+import { ProductsProps } from "@/types";
 
 
-const Home = () => {
+const Home = async() => {
+
+    const product = await axios.get(`http://localhost:8001/api/v1/product?q=&filterCategory=Filter%20By%20Category&minPrice=${0}&maxPrice=${0}`);
+    const products: ProductsProps[] = product.data.data;
     return (
         <>
             <ToastContainer />
@@ -21,9 +25,9 @@ const Home = () => {
                 {
                         products.slice(10, 14).map((item, index) => 
                             <Card
-                            _id={item.id}
+                            _id={item._id}
                             index={index}
-                            title={item.productName}
+                            title={item.title}
                             imageurl={item.imageurl}
                             category={item.category}
                             price={item.price}
@@ -39,12 +43,12 @@ const Home = () => {
                 {
                         products.slice(0,8).map((item, index) => 
                             <Card
-                            _id={item.id}
-                            index={index}
-                            title={item.title}
-                            iamgeurl={item.imgUrl}
-                            category={item.category}
-                            price={item.price}
+                                _id={item._id}
+                                index={index}
+                                title={item.title}
+                                imageurl={item.imageurl}
+                                category={item.category}
+                                price={item.price}
                                 
                         />
                     )
@@ -61,10 +65,10 @@ const Home = () => {
                     {
                         products.slice(10, 18).map((item, index) =>
                             <Card
-                                id={item.id}
+                                _id={item._id}
                                 index={index}
-                                productName={item.productName}
-                                imgUrl={item.imgUrl}
+                                title={item.title}
+                                imageurl={item.imageurl}
                                 category={item.category}
                                 price={item.price}
                             />

@@ -2,13 +2,13 @@
 import React, { useEffect, useState } from 'react'
 import Card from './Card'
 import Image from 'next/image'
-import { FilterShop } from '@/types';
+import { FilterShop, ProductsProps } from '@/types';
 import noDataFound from '../app/assets/images/sorry.png';
 import axiosInstance from '@/utils/api/axios';
 
 const ShopProducts = ({search,minPrice,maxPrice,selectedCategory}:FilterShop) => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState<ProductsProps[]>([]);
     const [loading, setLoading] = useState(true);
 
     const productsPerPage = 8;

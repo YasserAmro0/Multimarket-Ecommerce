@@ -7,7 +7,7 @@ import ImageOffers from '../app/assets/images/counter-timer-img.png'
 
 const OffersSection = () => {
  
-    const targetDate = moment("2023-09-10");
+    const targetDate = moment("2024-02-10");
     const [timeLeft, setTimeLeft] = useState(getTimeLeft(targetDate));
 
     useEffect(() => {
