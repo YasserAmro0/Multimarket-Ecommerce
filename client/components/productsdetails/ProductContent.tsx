@@ -1,15 +1,45 @@
 "use client"
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import Reviews from './Reviews';
 import imageNoProduct from '../../app/assets/images/no-products.jpg'
 import { ProductsProps } from '@/types';
+import { userDataContext } from '@/context';
+import Modal from '../Modal';
+import { ToastContainer, toast } from 'react-toastify';
+import axiosInstance from '@/utils/api/axios';
+import { usePathname } from 'next/navigation';
+import { AxiosError } from 'axios';
+
+
 
 const ProductContent = ({ product }: {product: ProductsProps }) => {
   const [isDescription, setIsDescription] = useState(true);
   const [quantity, setQuantity] = useState(1);
-  
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isLoginPage, setIsLoginPage] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const pathname = usePathname();
+
+
+  const userContext = useContext(userDataContext);
+
+  const handleAddToCart = async () => {
+    if (!userContext?.userData) {
+      setIsLoginPage(false)
+      setIsLoginModalOpen(true);
+      toast.info("login before adding to cart");
+    }
+    const pathnameParts = pathname.split('/');
+    const id = pathnameParts[pathnameParts.length - 1];
+    setIsLoading(true); 
+ 
+      await axiosInstance.post(`cart/addToCart/${id}`, {
+        quantity: parseInt(`${quantity}`),
+      });
+      toast.success('add to cart successfully 🎉')
+      setIsLoading(false);
+  }
 
   if (!product) {
     return <div className='flex justify-center'>
@@ -24,8 +54,9 @@ const ProductContent = ({ product }: {product: ProductsProps }) => {
   return (
     <div>
       <div className='container flex gap-40'>
+       
         <div>
-          <Image src={product.imageurl ?? ''} height={600} width={600} alt='Image product' />
+          <Image src={product.imageurl ?? ''} height={650} width={650} alt='Image product' />
         </div>
         <div>
           <h2>{product.title}</h2>
@@ -52,24 +83,34 @@ const ProductContent = ({ product }: {product: ProductsProps }) => {
             <label className='mr-2 mt-1 text-bold'>Quantity:</label>
             <input
               type='number'
-              min='1' // Set a minimum value (usually 1, as it represents the minimum quantity)
-              value={quantity} // Bind this input to a quantity variable in your component state
-              onChange={(e) => setQuantity(parseInt(e.target.value, 10))} // Update the quantity when the user changes it
+              min='1' 
+              value={quantity} 
+              onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
               className='border border-gray-300 p-1 rounded w-24'
             />
           </div>
           <p className='mt-4'>{product.shortDescription}</p>
           {/* Button */}
-          <Link href='/cart'>
-            <button className='bg-[#0A1D37] hover:bg-blue-900 text-white font-bold py-2 px-4 rounded mt-6'>
-              add to Cart
-            </button>
-          </Link>
-
+          <button
+            className="bg-[#0A1D37] hover:bg-blue-900 text-white font-bold py-2 px-4 rounded mt-6" 
+            onClick={handleAddToCart}
+          >
+             Add to Cart
+          </button>
         </div>
+        {isLoginModalOpen && (
+          <Modal
+            isOpen={isLoginModalOpen}
+            setIsOpen={setIsLoginModalOpen}
+            isLoginPage={isLoginPage}
+            closeModel={() => setIsLoginModalOpen(false)}
+            setLoginPage={setIsLoginPage}
+          />
+          
+        )}
       </div>
 
-
+      <ToastContainer />
       <div className=' mt-8'>
         <div className='container'>
           {/* button switch */}

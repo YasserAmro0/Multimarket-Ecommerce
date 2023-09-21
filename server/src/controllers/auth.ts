@@ -42,7 +42,6 @@ const LoginUserAdmin = async (req: Request, res: Response, next: NextFunction) =
         }
         const token = await generateToken({
             userId: user._id,
-            isLogin:true,
         });
 
         res.json({
@@ -82,10 +81,12 @@ const LoginAdmin = async (req: Request, res: Response, next: NextFunction) => {
         if (password !== "admin") {
             throw templateErrors.BAD_REQUEST('Password  Wrong try again');
         }
-
+        const token = await generateToken({
+            admin: 'admin123',
+        });
         res.json({
             message: 'Admin logged in successfully',
-            data: { role: "admin" },
+            data: { access_token: token },
         });
     } catch (error) {
         next(error);
@@ -93,4 +94,4 @@ const LoginAdmin = async (req: Request, res: Response, next: NextFunction) => {
 
     
 }
-export { Signup, LoginUserAdmin, getAuth };
+export { Signup, LoginUserAdmin, getAuth, LoginAdmin };

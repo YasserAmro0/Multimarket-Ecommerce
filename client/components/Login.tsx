@@ -5,16 +5,18 @@ import Image from "next/image";
 import logoImage from '../app/assets/images/eco-logo.png'
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/api/axios";
-import { useState } from "react";
-import { toast } from "react-toastify";
+import { useContext, useState } from "react";
+import { userDataContext } from '@/context';
 
-const Login = ({ setLoginPage, setIsOpen }: LoginProps) => {
+
+const Login = ({ setLoginPage }: LoginProps) => {
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    const { userChange, setUserChange } = useContext(userDataContext!)!;
 
     const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(e.target.value);
@@ -24,7 +26,7 @@ const Login = ({ setLoginPage, setIsOpen }: LoginProps) => {
         setEmail(e.target.value);
         setEmailError('');
     }
-    const SignUpPost = async () => {
+    const LoginPost = async () => {
         try {
             setErrorMessage('');
             setLoading(true);
@@ -34,9 +36,7 @@ const Login = ({ setLoginPage, setIsOpen }: LoginProps) => {
             });
             localStorage.setItem('access_token', response.data.access_token);
             setLoading(false);
-            toast.success("login successfully 🎉");
-            setIsOpen(false); 
-            window.location.reload();
+            setUserChange(!userChange);
         } catch (error) {
             const err = error as AxiosError;
             setLoading(false);
@@ -99,7 +99,7 @@ const Login = ({ setLoginPage, setIsOpen }: LoginProps) => {
                 <Button
                     type="submit"
                     className="bg-[#0A1D37]"
-                    onClick={SignUpPost}
+                    onClick={LoginPost}
                     disabled={loading}
                 >
                     {loading ? 'Login...' : 'login'}

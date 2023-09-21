@@ -2,34 +2,27 @@
 import Link from 'next/link'
 import Image from 'next/image';
 import logoImage from '../app/assets/images/eco-logo.png';
-import { useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import Modal from './Modal';
-import { usePathname } from 'next/navigation';
-import axiosInstance from '@/utils/api/axios';
+import { usePathname ,useRouter} from 'next/navigation';
+import { userDataContext } from '@/context';
 
 
 const Navbar = () => {
     const [isExpanded, toggleExpansion] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [isLoginPage, setLoginPage] = useState(false);
-    const [isLogin, setIsLogin] = useState(false);
-
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const userContext = useContext(userDataContext);
+    const router = useRouter()
     const pathname = usePathname();
 
     const handleLogout = () => {
         localStorage.removeItem('access_token');
-        setIsLogin(false);
+        userContext?.setUserData(null);
+        router.push('/', { scroll: false })
     }
    
-    useEffect(() => {
-        const getUserData =  async() => {
-            const response = await axiosInstance.get('/auth');
-            if (response.data.username) {
-                setIsLogin(true);
-            }
-        }
-        getUserData();
-    },[])
     const toggleMenu = () => {
         toggleExpansion(!isExpanded);
     };
@@ -75,10 +68,24 @@ const Navbar = () => {
                     <div className="notification-circle">0</div>
                  </div>
                     </Link>
-                    {isLogin ?
-                        <button onClick={handleLogout}>
-                            <i className="ri-logout-box-r-line  cursor-pointer"> Logout</i>
-                        </button> :
+                    {userContext?.userData ?
+                        <div className="relative">
+                            <div className="icon-container relative cursor-pointer flex justify-between ri-align-center" onClick={() => setDropdownOpen(!dropdownOpen)}>
+                                {/* <i className="ri-arrow-down-s-line text-2xl"></i> */}
+                                <p className='text-[#0A1D37] pl-2'>{userContext?.userData.username}</p>
+                            </div>
+                            {dropdownOpen && (
+                                <div className={`absolute bg-gray-50 p-4 rounded shadow-md right-0 top-12 z-10 `}>
+                                    <ul className='px-4 '>
+                                        <li>
+                                            <button onClick={handleLogout} className='flex'>
+                                                <i className="ri-logout-box-r-line cursor-pointer"></i> Logout
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            )}
+                        </div> :
                         <><i className="ri-menu-line text-xl cursor-pointer" onClick={toggleMenu}></i><div id="menuDropdown" className={` absolute ${isExpanded ? '' : 'hidden'} bg-gray-50 p-4 rounded shadow-md right-20 top-12 z-10`}>
                         <ul className='px-4'>
                             <li>
@@ -101,7 +108,6 @@ const Navbar = () => {
                             </li>
                         </ul>
                     </div></>}
-                    {/* <Link href='/admin/dashboard' className='bg-[#0A1D37] rounded-full px-2 text-white'>Dashboard</Link> */}
                 </div>
             </div>
             

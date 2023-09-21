@@ -25,7 +25,7 @@ const getAllReviewsForProduct = async (productId:Types.ObjectId) => {
     const reviewsForProduct = await Reviews.find({ productId });
 
     if (reviewsForProduct.length === 0) {
-        return null; 
+        return []; 
     }
     const userIds = reviewsForProduct.map(review => review.userId);
 

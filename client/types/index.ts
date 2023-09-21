@@ -34,7 +34,6 @@ export interface SignUpProps{
 
 export interface LoginProps{
     setLoginPage: Dispatch<SetStateAction<boolean>>;
-    setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface HeadersProps {
@@ -57,4 +56,41 @@ export interface FilterPriceProps {
     setMinPrice: (value: number) => void;
     maxPrice: number;
     setMaxPrice: (value: number) => void;
+}
+
+export interface UserData {
+    username?: string
+}
+export interface AppContextProps {
+    children: React.ReactNode;
+}
+
+export interface UserDataContextValue {
+    userData: UserData | null;
+    setUserData: React.Dispatch<React.SetStateAction<UserData | null>>;
+    userChange: boolean;
+    setUserChange: React.Dispatch<React.SetStateAction<boolean>>;
+
+}
+
+export interface InputCommentType{
+    rating: number;
+    setRating: Dispatch<SetStateAction<number>>;
+    fetchReviews: () => Promise<void>;
+}
+
+export interface ReviewsType {
+    comment: string;
+    rating: number;
+    productId: string;
+    userId: string;
+    username: string;
+    _id: string;
+}
+
+export interface CommentEditType{
+    commentForEdit: string;
+    setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+    idReview: string;
+    fetchReviews: () => Promise<void>;
 }

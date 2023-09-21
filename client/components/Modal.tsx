@@ -7,6 +7,7 @@ import ImageClose from '../app/assets/images/close.svg';
 import SignUp from './SignUp';
 import { ModalProps } from '@/types';
 import Login from './Login';
+import { ToastContainer } from 'react-toastify';
 
 const Modal = ({ isOpen, closeModel, isLoginPage, setLoginPage, setIsOpen }: ModalProps) => {
     return (
@@ -24,7 +25,7 @@ const Modal = ({ isOpen, closeModel, isLoginPage, setLoginPage, setIsOpen }: Mod
                     </Transition.Child>
                     <div className='fixed inset-0 overflow-y-auto'>
                         <div className='flex min-h-full items-center justify-center p-4 text-center'>
-                         
+                            <ToastContainer />
                             <Transition.Child
                                 as={Fragment}
                                 enter='ease-out duration-300'
@@ -51,7 +52,7 @@ const Modal = ({ isOpen, closeModel, isLoginPage, setLoginPage, setIsOpen }: Mod
                                     </button>
                                     <div className='flex justify-center'>
                                         {
-                                            isLoginPage ? <Login setLoginPage={setLoginPage} setIsOpen={setIsOpen} /> : <SignUp setLoginPage={setLoginPage} />
+                                            isLoginPage ? <Login setLoginPage={setLoginPage} /> : <SignUp setLoginPage={setLoginPage} />
                                         }
                                     </div>
                                    

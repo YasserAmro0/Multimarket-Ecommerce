@@ -6,9 +6,11 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 
-
 const Sidebar = () => {
     const pathname = usePathname();
+    const handleExit = () => {
+        localStorage.removeItem('access_token')
+    }
   return (
       <div className="w-1/5 bg-[#111827] p-4 text-white">
           {/* Logo */}
@@ -47,9 +49,12 @@ const Sidebar = () => {
 
           {/* Exit Button */}
           <div className="flex flex-col justify-end mt-[160%]">
-              <button className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-full">
-                  Exit      {`->`}
-              </button>
+              <Link href='/'>
+              <button className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-full flex" onClick={handleExit}>
+                      Exit    
+                      <i className="ri-logout-box-r-line cursor-pointer pl-4"></i>    
+                  </button>
+              </Link>
           </div>
       </div>
   )
