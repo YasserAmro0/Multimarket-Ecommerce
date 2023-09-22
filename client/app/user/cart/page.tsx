@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Image from 'next/image';
 import cartImageBackground from '../../assets/images/cartImageBackground.jpg';
 import Link from 'next/link';
@@ -7,7 +7,6 @@ import { Table } from '@/components';
 import { Metadata } from 'next/types';
 import axiosInstance from '@/utils/api/fetch';
 import { ProductCartType } from '@/types';
-import RootLayout from '../layout';
 
 export const metadata: Metadata = {
     title: 'cart',
@@ -60,8 +59,17 @@ const page = () => {
                 </div>
             </div>
             <div className='flex justify-between container'>
-                <Table cartData={cartData} loading={loading} getData={getData} />
+                {loading ? (
+                    <div className="text-center">
+                        <div className="spinner_status" role="status">
+                            <span className="spinner_loading">Loading...</span>
+                        </div>
+                    </div>
+                ): 
+                        <Table cartData = { cartData } loading = { loading }  setCartData = { setCartData } />
+                }
               
+               
                     <div>
                         <div className='container flex justify-between items-center'>
                             <h2>Subtotal</h2>

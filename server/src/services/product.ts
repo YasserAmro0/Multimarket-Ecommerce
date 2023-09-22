@@ -4,6 +4,7 @@ import { v2 as cloudinary } from 'cloudinary';
 import config from '../config';
 import product from "../models/product";
 import { Types } from "mongoose";
+import { templateErrors } from "../helpers";
 
 
 
@@ -36,7 +37,12 @@ const AddProduct = async ({
 
 }
 
-const GetProduct = async (filterCategory: string, name: string, minPrice : number, maxPrice: number) => {
+const GetProduct = async (
+    filterCategory: string,
+    name: string,
+    minPrice: number,
+    maxPrice: number,
+) => {
 
     const filter: any = {};
 
@@ -72,6 +78,9 @@ const GetProduct = async (filterCategory: string, name: string, minPrice : numbe
  
 const getProductById = async (productId: Types.ObjectId) => {
     let product = await Product.findById(productId);
+    if (!product) { 
+        throw templateErrors.NOT_FOUND('No such product exists');
+    }
     return product;
 }
 

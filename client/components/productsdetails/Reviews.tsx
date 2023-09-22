@@ -8,7 +8,7 @@ import { ReviewComType, ReviewsType } from '@/types';
 import { toast } from 'react-toastify';
 import EditComment from './EditeComment';
 
-const Reviews = ({ fetchReviews, isLoading, reviews }: ReviewComType) => {
+const Reviews = ({ fetchReviews, isLoading, reviews, setReviews }: ReviewComType) => {
     const [rating, setRating] = useState(0);
     const [isEditing, setIsEditing] = useState(false);
     const userContext = useContext(userDataContext);
@@ -23,16 +23,14 @@ const Reviews = ({ fetchReviews, isLoading, reviews }: ReviewComType) => {
     const handleDeleteReview =async (_id:string) => {
         await axiosInstance.delete(`review/${_id}`);
         toast.success('delete comment done');
-        fetchReviews();
+        setReviews((prevReviews) => prevReviews.filter((review) => review._id !== _id));
     }
-
 
     useEffect(() => {
         fetchReviews();
     }, []);
 
   
-
     return (
         <>
             {isLoading ? (
@@ -89,7 +87,7 @@ const Reviews = ({ fetchReviews, isLoading, reviews }: ReviewComType) => {
                         ></i>
                     ))}
                 </span>
-                <InputComment rating={rating} setRating={setRating} fetchReviews={fetchReviews} />
+                <InputComment rating={rating} setRating={setRating} setReviews={setReviews} reviews={reviews} />
             </div>
         </> 
             

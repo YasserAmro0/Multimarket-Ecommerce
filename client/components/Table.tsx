@@ -5,20 +5,16 @@ import axiosInstance from '@/utils/api/axios';
 import { ToastContainer, toast } from 'react-toastify';
 import { ProductCartType, TableCartType } from '@/types';
 
-const Table = ({ loading, getData, cartData }: TableCartType) => {
-    console.log(cartData,'tabble')
-    useEffect(() => {
-        getData();
-    }, []);
-
+const Table = ({ loading, cartData, setCartData }: TableCartType) => {
+ 
     const handleDeleteProduct = async (_id: string) => {
         try {
             await axiosInstance.delete(`cart/${_id}`);
+            setCartData((prevCart) => prevCart.filter((cart) => cart.product._id !== _id));
             toast.success('delete product done ✔');
         } catch (error) {
             console.log(error);
         }
-        getData();
     }
   return (
       <div className="mt-10 max-h-[500px] overflow-y-auto">

@@ -77,7 +77,8 @@ export interface UserDataContextValue {
 export interface InputCommentType{
     rating: number;
     setRating: Dispatch<SetStateAction<number>>;
-    fetchReviews: () => Promise<void>;
+    setReviews: Dispatch<SetStateAction<ReviewsType[]>>;
+    reviews: ReviewsType[];
 }
 
 export interface ReviewsType {
@@ -110,13 +111,15 @@ export interface ProductCartType {
 }
 
 export interface TableCartType{
-    getData: () => Promise<void>;
     loading: boolean;
     cartData: ProductCartType[];
+    setCartData: Dispatch<SetStateAction<ProductCartType[]>>;
 }
 
 export interface ReviewComType{
     reviews: ReviewsType[];
     isLoading: boolean;
     fetchReviews: () => Promise<void>;
+    setReviews: Dispatch<SetStateAction<ReviewsType[]>>;
+
 }

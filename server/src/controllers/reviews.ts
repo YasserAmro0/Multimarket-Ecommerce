@@ -13,8 +13,8 @@ const addReviewsController = async (req: RequestWithUserRole, res: Response, nex
 
     try {
         await reviewsSchema.validate({ comment, rating });
-        await addReviews(userData?.userId, productId, comment, rating);
-        return res.status(201).json({ message: 'add review successfully' });
+        const reviews = await addReviews(userData?.userId, productId, comment, rating);
+        return res.status(201).json({ message: 'add review successfully', data: reviews });
     } catch (err) {
         if (err instanceof yup.ValidationError) {
             return next(templateErrors.BAD_REQUEST(err.message));

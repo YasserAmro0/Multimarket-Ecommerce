@@ -1,5 +1,5 @@
 "use client"
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Reviews from './Reviews';
 import imageNoProduct from '../../app/assets/images/no-products.jpg'
@@ -55,6 +55,9 @@ const ProductContent = ({ product }: {product: ProductsProps }) => {
       setIsLoading(false);
     }
   };
+  useEffect(() => {
+    fetchReviews();
+  }, []);
 
   if (!product) {
     return <div className='flex justify-center'>
@@ -149,6 +152,7 @@ const ProductContent = ({ product }: {product: ProductsProps }) => {
                   fetchReviews={fetchReviews}
                   reviews={reviews}
                   isLoading={isLoading}
+                  setReviews={setReviews}
                 />
             }
 

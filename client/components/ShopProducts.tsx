@@ -30,6 +30,10 @@ const ShopProducts = ({search,minPrice,maxPrice,selectedCategory}:FilterShop) =>
         getData();
     }, [search, minPrice, maxPrice, selectedCategory]);
 
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [search, minPrice, maxPrice, selectedCategory]);
+
     return (
         <>
             {loading ? (

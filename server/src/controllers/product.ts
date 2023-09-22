@@ -25,6 +25,7 @@ const getProductController = async (req: Request, res: Response, next: NextFunct
         } = req.query;
         const parsedMinPrice = parseFloat(minPrice as string);
         const parsedMaxPrice = parseFloat(maxPrice as string);
+        
 
         const products = await GetProduct(filterCategory as string, q as string, parsedMinPrice, parsedMaxPrice);
         return res.status(201).json({ message: 'get Product successfully', data:  products });

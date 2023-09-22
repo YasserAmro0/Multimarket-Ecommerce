@@ -8,7 +8,7 @@ import axiosInstance from '@/utils/api/axios';
 import { AxiosError } from 'axios';
 import { InputCommentType } from '@/types';
 
-const InputComment = ({ rating, setRating, fetchReviews }: InputCommentType) => {
+const InputComment = ({ rating, setRating, setReviews, reviews }: InputCommentType) => {
     const [comment, setComment] = useState('');
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const [isLoginPage, setIsLoginPage] = useState(true);
@@ -28,18 +28,19 @@ const InputComment = ({ rating, setRating, fetchReviews }: InputCommentType) => 
         const id = pathnameParts[pathnameParts.length - 1];
 
         try {
-            await axiosInstance.post(`review/addreview/${id}`, {
+            const response =await axiosInstance.post(`review/addreview/${id}`, {
                 comment,
                 rating,
             });
             setRating(0);
             setComment('');
+            setReviews([...reviews, response.data]);
             toast.success('add review successfully 🎉')
         } catch (error) {
             const err = error as AxiosError;
                 toast.error(err.message);
         }
-        fetchReviews();
+      
         
     }
 

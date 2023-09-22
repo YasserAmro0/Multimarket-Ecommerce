@@ -67,7 +67,6 @@ const Navbar = () => {
                     <Link href="/user/cart">
                     <div className="icon-container relative">
                     <i className="ri-shopping-cart-line text-xl cursor-pointer"></i>
-                            <div className="notification-circle">{0}</div>
                  </div>
                     </Link>
                     {userContext?.userData ?

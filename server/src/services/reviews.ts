@@ -16,9 +16,19 @@ const addReviews = async (
         comment,
         rating,
     });
-
     const reviews = await newReview.save();
-    return reviews;
+
+    const user = await User.findById(userId).lean();
+    const username = user?.username;
+
+    if (!user) {
+        throw new Error('User not found');
+    }
+
+    return {
+         ...reviews.toObject(),
+        username: username,
+    };
 }
 
 const getAllReviewsForProduct = async (productId:Types.ObjectId) => {
