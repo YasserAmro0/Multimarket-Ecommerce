@@ -32,28 +32,24 @@ const addReviews = async (
 }
 
 const getAllReviewsForProduct = async (productId:Types.ObjectId) => {
-    const reviewsForProduct = await Reviews.find({ productId });
+    const reviewsForProduct = await Reviews.find({ productId })
+        .populate('userId', 'username');
 
     if (reviewsForProduct.length === 0) {
-        return []; 
+        return [];
     }
-    const userIds = reviewsForProduct.map(review => review.userId);
-
-    const users = await User.find({ _id: { $in: userIds } });
-
-    const userIdToUsername = new Map();
-
-    users.forEach(user => {
-        userIdToUsername.set(user._id.toString(), user.username);
-    });
 
     const reviewsWithUserName = reviewsForProduct.map(review => ({
-        ...review.toObject(),
-        username : userIdToUsername.get(review.userId.toString()),
+        productId: review.productId,
+        userId:review.userId,
+        username: review.userId.username,
+        comment: review.comment,
+        rating:review.rating,
+        
     }));
 
-
     return reviewsWithUserName;
+
 }
 
 const updateComment = async (userId: string, idReview: Types.ObjectId, newComment: string) => {

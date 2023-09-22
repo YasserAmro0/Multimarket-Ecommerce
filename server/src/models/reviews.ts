@@ -1,7 +1,8 @@
-import mongoose from 'mongoose';
+import mongoose, { Model } from 'mongoose';
+import { IReview } from '../types/models';
 const { Schema } = mongoose;
 
-const reviewsSchema = new Schema({
+const reviewsSchema = new Schema<IReview>({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -9,7 +10,7 @@ const reviewsSchema = new Schema({
     },
     productId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product',
+        ref: 'Products',
         required: true,
     },
     comment: {
@@ -24,7 +25,7 @@ const reviewsSchema = new Schema({
 
 });
 
-const Reviews = mongoose.model('Reviews', reviewsSchema);
+const Reviews: Model<IReview> = mongoose.model('Reviews', reviewsSchema);
 
 export default Reviews;
 

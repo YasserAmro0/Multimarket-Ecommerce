@@ -1,7 +1,8 @@
-import mongoose from 'mongoose';
+import mongoose, { Model } from 'mongoose';
+import { IProduct } from '../types/models';
 const { Schema } = mongoose;
 
-const productSchema = new Schema({
+const productSchema = new Schema<IProduct>({
     title: {
         type: String,
         required: true,
@@ -25,9 +26,9 @@ const productSchema = new Schema({
     imageurl: {
         type: String,
         required: true,
-    }
-});
+    },
+})
 
-const Product = mongoose.model('Products', productSchema);
+const Product : Model<IProduct>= mongoose.model('Products', productSchema);
 
 export default Product;
