@@ -3,8 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import InputComment from './InputComment';
 import { userDataContext } from '@/context';
 import axiosInstance from '@/utils/api/axios';
-import { usePathname } from 'next/navigation';
-import { ReviewComType, ReviewsType } from '@/types';
+import { ReviewComType } from '@/types';
 import { toast } from 'react-toastify';
 import EditComment from './EditeComment';
 
@@ -61,13 +60,18 @@ const Reviews = ({ fetchReviews, isLoading, reviews, setReviews }: ReviewComType
                                 ) : (
                                     <p className='w-85 text-slate-900'>{review.comment}</p>
                                 )}
+                         
                 
                             </div>
                             {userContext?.userData?._id === review.userId && (
                                 <div className='text-xl cursor-pointer'>
+                                    
                                     <i
                                         className="ri-delete-bin-6-line pr-2 text-red-700"
-                                        onClick={() => handleDeleteReview(review._id)}
+                                        onClick={() => {
+                                            console.log(review.userId ,"user",userContext?.userData?._id); // Add this line
+                                            handleDeleteReview(review._id);
+                                        }}
                                     ></i>
                                     <i className="ri-edit-2-fill" onClick={handleEditClick}></i>
                                 </div>

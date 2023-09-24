@@ -2,7 +2,12 @@ import { Signup, LoginUserAdmin, getAuth, LoginAdmin } from './auth';
 import { addProductController, getProductController, getProductByIdController } from './product';
 import { addToCartController, getAllProductsInCart, deleteFromCartController } from './cart';
 import { addReviewsController, getReviewsController, updateCommentController, deleteReviewController } from './reviews';
-import { getAllReviewsController, deleteReviewAdminController } from "./admin";
+import {
+    getAllReviewsController,
+    deleteReviewAdminController,
+    getProductAdminController, deleteProductAdminController,
+    updateProductAdminController
+} from "./admin";
 export {
     Signup, LoginUserAdmin,
     addProductController, getProductController,
@@ -11,5 +16,6 @@ export {
     getReviewsController, deleteFromCartController,
     updateCommentController, deleteReviewController,
     getAuth, LoginAdmin, getAllReviewsController,
-    deleteReviewAdminController
+    deleteReviewAdminController, getProductAdminController,
+    deleteProductAdminController, updateProductAdminController
 };

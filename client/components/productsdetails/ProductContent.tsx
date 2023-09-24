@@ -56,7 +56,7 @@ const ProductContent = ({ product }: {product: ProductsProps }) => {
     }
   };
   useEffect(() => {
-    fetchReviews();
+      fetchReviews();
   }, []);
 
   if (!product) {

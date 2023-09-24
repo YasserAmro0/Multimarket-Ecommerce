@@ -9,10 +9,10 @@ export interface ReviewsProps {
 export interface ProductsProps {
     index?: number
     title?: string;
-    imageurl?: string | StaticImport;
+    imageurl: string | StaticImport;
     category?: string;
     price?: number;
-    _id?: string;
+    _id: string;
     avgRating?: number;
     description?: string;
     shortDescription?: string;
@@ -121,5 +121,14 @@ export interface ReviewComType{
     isLoading: boolean;
     fetchReviews: () => Promise<void>;
     setReviews: Dispatch<SetStateAction<ReviewsType[]>>;
+
+}
+
+export interface ReviewAdminType{
+    title: string;
+    imageurl: string;
+    comment: string;
+    username: string;
+    _id: string;
 
 }

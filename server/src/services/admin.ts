@@ -1,5 +1,5 @@
 import mongoose, { Types } from "mongoose";
-import { Reviews } from "../models";
+import { Product, Reviews } from "../models";
 import { templateErrors } from "../helpers";
 
 
@@ -30,4 +30,46 @@ const deleteReviewAdmin = async (reviewId: Types.ObjectId) => {
     return deletedReview;
 }
 
-export { getAllReviews, deleteReviewAdmin };
+
+const getProductsAdmin = async () => {
+    const products = await Product.find({});
+    return products;
+}
+
+const deleteProductAdmin = async (productId: Types.ObjectId) => {
+    const deleted = await Product.deleteOne({ _id: productId });
+    if (!deleted) {
+        throw templateErrors.NOT_FOUND("product not found");
+    }
+    return deleted;
+}
+
+const updateProductAdmin = async (
+    productId: Types.ObjectId,
+    title: string, price: number,
+    category: string, description:string,
+    shortDescription: string, imageurl: string) => {
+    
+    const product = await Product.findById(productId);
+    if (!product) {
+        throw templateErrors.NOT_FOUND("product not found");
+    }
+
+    product.title = title;
+    product.price = price;
+    product.category = category;
+    product.description = description;
+    product.shortDescription = shortDescription;
+    product.imageurl = imageurl;
+
+    const afterUpdate = await product.save();
+    return afterUpdate;
+}
+
+export {
+    getAllReviews,
+    deleteReviewAdmin,
+    getProductsAdmin,
+    deleteProductAdmin,
+    updateProductAdmin
+};

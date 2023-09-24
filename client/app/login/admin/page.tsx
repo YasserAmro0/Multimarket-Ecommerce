@@ -51,7 +51,7 @@ const page = () => {
         }
     }
   return (
-      <div className="flex flex-col items-center justify-center mt-32">
+      <div className="flex flex-col items-center justify-center mt-32 ">
 
           <div className="mb-4">
               <Image src={logoImage} alt="Logo" className="w-12 h-12" />

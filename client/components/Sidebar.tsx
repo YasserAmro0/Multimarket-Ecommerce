@@ -15,8 +15,8 @@ const Sidebar = () => {
       <div className="w-1/5 bg-[#111827] p-4 text-white">
           {/* Logo */}
           <div className="flex items-start justify-start mb-6 gap-6 border-b-2">
-              <Image src={LogoImage} alt="Logo" width={40} height={40} className=" bg-white" />
-              <h1 className='text-white '>Multimarkt</h1>
+              <Image src={LogoImage} alt="Logo" width={35} height={35} className=" bg-white" />
+              <h1 className='text-white text-2xl'>Multimarkt</h1>
           </div>
 
           {/* Button Links */}
@@ -25,7 +25,7 @@ const Sidebar = () => {
               block py-2 
               pl-2 text-gray-400 rounded-lg
              hover:text-white hover:bg-teal-600
-             ${pathname === '/admin/dashboard' ?'bg-teal-800 text-white':''}
+             ${pathname === '/admin/dashboard' ?'bg-teal-700 text-white':''}
                 `}>
                   Products
               </Link>
@@ -33,7 +33,7 @@ const Sidebar = () => {
               block py-2 
               pl-2 text-gray-400 rounded-lg
              hover:text-white hover:bg-teal-600
-             ${pathname === '/admin/reviewers' ? 'bg-teal-800 text-white' : ''}
+             ${pathname === '/admin/reviewers' ? 'bg-teal-700 text-white' : ''}
                 `}>
                   Reviewers
               </Link>
@@ -41,7 +41,7 @@ const Sidebar = () => {
               block py-2 
               pl-2 text-gray-400 rounded-lg
              hover:text-white hover:bg-teal-600
-             ${pathname === '/admin/addproduct' ? 'bg-teal-800 text-white' : ''}
+             ${pathname === '/admin/addproduct' ? 'bg-teal-700 text-white' : ''}
                 `}>
                   Add Product
               </Link>

@@ -97,26 +97,24 @@ input {
   @apply appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-100 mt-4
 }
 
-@keyframes slideInRight {
-  0% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
 
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
+
+body::-webkit-scrollbar {
+  width: 12px;
 }
 
-@keyframes slideInLeft {
-  0% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
+body::-webkit-scrollbar-thumb {
+  background-color: #053c89;
+  /* Adjust the color */
+  border-radius: 4px;
+}
 
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
+body::-webkit-scrollbar-track {
+  background-color: #ffff;
+  /* Adjust the background color */
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: var(--heading-text-color);
+  /* Adjust the hover color */
 }

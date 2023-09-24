@@ -29,7 +29,7 @@ const Table = ({ loading, cartData, setCartData }: TableCartType) => {
                       <th className="px-6 py-3 ">action</th>
                   </tr>
               </thead>
-              <tbody className="bg-gray-200">
+              <tbody className="bg-gray-50">
                   {loading ? (
                       <div className="text-center">
                           Loading...

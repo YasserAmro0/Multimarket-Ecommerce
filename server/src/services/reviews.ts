@@ -33,7 +33,7 @@ const addReviews = async (
 
 const getAllReviewsForProduct = async (productId:Types.ObjectId) => {
     const reviewsForProduct = await Reviews.find({ productId })
-        .populate('userId', 'username');
+        .populate('userId', 'username _id');
 
     if (reviewsForProduct.length === 0) {
         return [];
@@ -41,10 +41,11 @@ const getAllReviewsForProduct = async (productId:Types.ObjectId) => {
 
     const reviewsWithUserName = reviewsForProduct.map(review => ({
         productId: review.productId,
-        userId:review.userId,
+        userId: review.userId._id.toString(),
         username: review.userId.username,
         comment: review.comment,
-        rating:review.rating,
+        rating: review.rating,
+        _id:review._id,
         
     }));
 

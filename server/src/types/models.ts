@@ -1,7 +1,10 @@
+import { Types } from "mongoose";
+
 interface IUser extends Document {
     username: string;
     password: string;
     email: string;
+    _id: Types.ObjectId;
 }
 
 interface IProduct extends Document {
