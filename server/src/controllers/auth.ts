@@ -5,6 +5,8 @@ import { registerUser, Login } from "../services";
 import bcrypt from 'bcrypt';
 import { RequestWithUserRole } from "../types";
 import { User } from "../models";
+import config from '../config';
+
 
 
 // signup
@@ -75,14 +77,14 @@ const getAuth = async (req: RequestWithUserRole, res: Response, next: NextFuncti
 const LoginAdmin = async (req: Request, res: Response, next: NextFunction) => {
     const { email, password } = req.body;
     try {
-        if (email !== "admin@gmail.com") {
+        if (email !== config.AdminEmail) {
             throw templateErrors.BAD_REQUEST('Email  Wrong try again');
         }
-        if (password !== "admin") {
+        if (password !==config.AdminPassword ) {
             throw templateErrors.BAD_REQUEST('Password  Wrong try again');
         }
         const token = await generateToken({
-            admin: 'admin123',
+            isAdmin: true,
         });
         res.json({
             message: 'Admin logged in successfully',

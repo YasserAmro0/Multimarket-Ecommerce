@@ -1,9 +1,10 @@
 "use client"
 import Link from 'next/link'
-import React from 'react';
+import React, { useEffect } from 'react';
 import LogoImage from '../app/assets/images/eco-logo.png';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { isAdmin } from '@/utils';
 
 
 const Sidebar = () => {
@@ -12,6 +13,12 @@ const Sidebar = () => {
         localStorage.removeItem('access_token');
         window.location.replace('/');
     }
+    useEffect(() => {
+        const token: any = localStorage.getItem('access_token');
+        if (!isAdmin(token) || !token) {
+            window.location.replace('/');
+        }
+    },[])
   return (
       <div className="w-1/5 bg-[#111827] p-4 text-white">
           {/* Logo */}

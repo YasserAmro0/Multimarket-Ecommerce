@@ -23,7 +23,7 @@ const page = () => {
         setEmail(e.target.value);
         setEmailError('');
     }
-    const LoginPost = async () => {
+    const LoginAdmin = async () => {
         try {
             setErrorMessage('');
             setLoading(true);
@@ -95,7 +95,7 @@ const page = () => {
               <Button
                   type="submit"
                   className="bg-[#0A1D37]"
-                  onClick={LoginPost}
+                  onClick={LoginAdmin}
                   disabled={loading}
               >
                   {loading ? 'Login...' : 'login'}

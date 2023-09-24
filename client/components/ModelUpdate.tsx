@@ -4,21 +4,7 @@ import { Button, Modal } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import FormAddProduct from './FormAddProduct';
 import axiosInstance from '@/utils/api/axios';
-import { ProductsProps } from '@/types';
-
-const defaultProductData: ProductsProps = {
-    title: '',
-    price: 0,
-    category: '',
-    description: '',
-    shortDescription: '',
-    imageurl: '',
-    index: 0,
-    _id: '',
-    avgRating: 0,
-    reviews: []
-};
-
+import { ProductsProps, defaultProductData } from '@/types';
 
 const ModelUpdate = ({ openModal, setOpenModal, productId }:any)=> {
     const props = { openModal, setOpenModal };

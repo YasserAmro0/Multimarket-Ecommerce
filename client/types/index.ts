@@ -140,3 +140,16 @@ export interface CartProps{
     index: number;
     _id: string;
 }
+
+export const defaultProductData: ProductsProps = {
+    title: '',
+    price: 0,
+    category: '',
+    description: '',
+    shortDescription: '',
+    imageurl: '',
+    index: 0,
+    _id: '',
+    avgRating: 0,
+    reviews: []
+};

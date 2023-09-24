@@ -1,5 +1,9 @@
+import jwt, { JwtPayload } from 'jsonwebtoken'; // Import JwtPayload from 'jsonwebtoken'
+
+interface CustomJwtPayload extends JwtPayload {
+    isAdmin: boolean;
+}
 import moment from 'moment';
-import axiosInstance from './api/axios';
 
 export const getTimeLeft = (targetDate: moment.Moment) => {
     const now = moment();
@@ -14,39 +18,13 @@ export const getTimeLeft = (targetDate: moment.Moment) => {
 };
 
 
-export const HeadersforProducts = [
-    {
-        title: 'Image',
-    },
-    {
-        title: 'Title',
-    },
-    {
-        title: 'Price',
-    },
-    {
-        title: 'Category',
-    },
-    {
-        title: 'Action',
-    }
-];
 
-export const HeadersforReviewers = [
-    {
-        title: 'Name',
-    },
-    {
-        title: 'Image Product',
-    },
-    {
-        title: 'Rating',
-    },
-    {
-        title: 'comment',
-    },
-    {
-        title: 'Action',
-    }
 
-];
+export const isAdmin = (token:string) => {
+    try {
+        const decodedToken = jwt.decode(token) as CustomJwtPayload;;
+        return decodedToken?.isAdmin === true;
+    } catch (error) {
+        return false;
+    }
+};

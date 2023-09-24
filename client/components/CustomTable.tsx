@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import { HeadersProps, ProductCartType, ProductsProps } from '@/types';
+import { ProductsProps } from '@/types';
 import { Table } from 'flowbite-react';
 import axiosInstance from '@/utils/api/axios';
 import Image from 'next/image';
