@@ -7,15 +7,15 @@ export interface ReviewsProps {
     text: string;
 }
 export interface ProductsProps {
-    index?: number
-    title?: string;
-    imageurl: string | StaticImport;
-    category?: string;
-    price?: number;
+    index: number
+    title: string;
+    imageurl: string;
+    category: string;
+    price: number;
     _id: string;
     avgRating?: number;
-    description?: string;
-    shortDescription?: string;
+    description: string;
+    shortDescription: string;
     reviews?: ReviewsProps[];
 }
 
@@ -105,7 +105,6 @@ export interface ProductCartType {
         price: number;
         shortDescription: string;
         title: string;
-        // Add more properties if needed
     };
     quantity: number;
 }
@@ -131,4 +130,13 @@ export interface ReviewAdminType{
     username: string;
     _id: string;
 
+}
+
+export interface CartProps{
+    title: string;
+    imageurl: string;
+    category: string;
+    price: number;
+    index: number;
+    _id: string;
 }

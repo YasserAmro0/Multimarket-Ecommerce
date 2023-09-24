@@ -1,9 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
-import { ProductsProps } from '@/types';
+import { CartProps, ProductsProps } from '@/types';
 import Link from 'next/link';
 
-const Card = ({ title, imageurl, category, price, index, _id }: ProductsProps) => {
+const Card = ({ title, imageurl, category, price, index, _id }: CartProps) => {
     return (
         <div className='container w-72 h-full shadow-lg p-4 relative' key={index}>
             <Link href={`/user/shop/${_id}`}>

@@ -9,7 +9,8 @@ import { usePathname } from 'next/navigation';
 const Sidebar = () => {
     const pathname = usePathname();
     const handleExit = () => {
-        localStorage.removeItem('access_token')
+        localStorage.removeItem('access_token');
+        window.location.replace('/');
     }
   return (
       <div className="w-1/5 bg-[#111827] p-4 text-white">
@@ -49,12 +50,11 @@ const Sidebar = () => {
 
           {/* Exit Button */}
           <div className="flex flex-col justify-end mt-[160%]">
-              <Link href='/'>
               <button className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-full flex" onClick={handleExit}>
                       Exit    
                       <i className="ri-logout-box-r-line cursor-pointer pl-4"></i>    
                   </button>
-              </Link>
+             
           </div>
       </div>
   )

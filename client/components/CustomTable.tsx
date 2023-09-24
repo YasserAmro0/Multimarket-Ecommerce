@@ -4,20 +4,38 @@ import { HeadersProps, ProductCartType, ProductsProps } from '@/types';
 import { Table } from 'flowbite-react';
 import axiosInstance from '@/utils/api/axios';
 import Image from 'next/image';
+import { ToastContainer, toast } from 'react-toastify';
+import { AxiosError } from 'axios';
+import ModelUpdate from './ModelUpdate';
 
 
 const CustomTable = () => {
     const [loading, setLoading] = useState(false);
     const [products, setProducts] = useState<ProductsProps[]>([]);
+    const [openModal, setOpenModal] = useState<string | undefined>();
+    const [selectedProductId, setSelectedProductId] = useState<string>();
+
 
     const handleDelete = async(_id:string) => {
-        
+        try {
+          const data =  await axiosInstance.delete(`admin/product/${_id}`);
+            setProducts((prevProduct) => prevProduct.filter((product) => product._id !== _id));
+            toast.success("delete product successfully ✔");
+        } catch (error) {
+            const err = error as AxiosError;
+            toast.error(err.message);
+        }
     }
+    
 
+    const handleEditClick = async (_id: string) => {
+        setSelectedProductId(_id);
+        setOpenModal('dismissible');
+    }
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axiosInstance.get(`/product?q=&filterCategory=Filter%20By%20Category&minPrice=${0}&maxPrice=${0}`);
+                const res = await axiosInstance.get(`admin/products`);
                 setProducts(res.data);
                 setLoading(false);
             } catch (error) {
@@ -28,7 +46,10 @@ const CustomTable = () => {
         getData();
     }, []);
 
-  return (
+    return (
+        <div className='max-h-[600px] overflow-y-auto'>
+           Number Of Product ({products.length})
+            <ToastContainer />
       <Table hoverable >
           <Table.Head className='sticky top-0 '>
               <Table.HeadCell className='text-bold bg-[#F3F4F6]'>
@@ -45,9 +66,11 @@ const CustomTable = () => {
               </Table.HeadCell>
               <Table.HeadCell className='text-bold bg-[#F3F4F6]'>
                   <span className="sr-only">
-                      Edit
+                            Edit
+                            
                   </span>
-              </Table.HeadCell>
+                    </Table.HeadCell>
+                    
           </Table.Head>
 
           <Table.Body className="divide-y">
@@ -79,16 +102,24 @@ const CustomTable = () => {
                           <Table.Cell>{product.category}</Table.Cell>
                           <Table.Cell>
 
-                              <i className="ri-delete-bin-5-line text-red-500 text-xl cursor-pointer"
+                              <i className="ri-delete-bin-5-line text-red-500 text-xl cursor-pointer mr-1"
                                   onClick={() => handleDelete(product._id)}
-                              ></i>
+                                  ></i>
+                                  <i className="ri-edit-2-fill text-xl cursor-pointer" onClick={()=>handleEditClick(product._id)}></i>
                           </Table.Cell>
                       </Table.Row>
                   ))
-              )}
+                    )}
+                    
           </Table.Body>
 
-      </Table>
+            </Table>
+            <ModelUpdate
+                openModal={openModal}
+                setOpenModal={setOpenModal}
+                productId={selectedProductId}
+            />
+            </div>
   )
 }
 

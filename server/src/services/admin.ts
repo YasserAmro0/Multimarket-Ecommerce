@@ -8,7 +8,7 @@ const getAllReviews = async () => {
         const reviews = await Reviews.find({})
             .populate('userId', 'username')
             .populate('productId', 'title imageurl')
-            .select('comment'); 
+        .select('comment'); 
         
         const formattedReviews = reviews.map((review) => ({
             title: review.productId.title,
@@ -37,6 +37,7 @@ const getProductsAdmin = async () => {
 }
 
 const deleteProductAdmin = async (productId: Types.ObjectId) => {
+    await Reviews.deleteMany({ productId: productId });
     const deleted = await Product.deleteOne({ _id: productId });
     if (!deleted) {
         throw templateErrors.NOT_FOUND("product not found");

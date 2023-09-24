@@ -1,10 +1,13 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import  { AxiosError } from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axiosInstance from '@/utils/api/axios';
-const FormAddProduct = () => {
+import { Button, Modal } from 'flowbite-react';
+import Image from 'next/image';
+import { ProductsProps } from '@/types';
+const FormAddProduct = ({ showAddButton = true, initialProductData }: { showAddButton: boolean, initialProductData: ProductsProps }) => {
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
     const [category, setCategory] = useState('sofa');
@@ -79,8 +82,39 @@ const FormAddProduct = () => {
        
     };
 
+    const handleUpdate = async () => {
+        try {
+            const resposne = await axiosInstance.put(`admin/product/${initialProductData._id}`, {
+                title,
+                category,
+                description,
+                shortDescription,
+                imageurl: image,
+                price,
+            });
+            console.log(resposne);
+            toast.success('update product done ✔');
+
+        } catch (error) {
+            const err = error as AxiosError;
+            toast.error(err.message);
+            
+        }
+        
+    }
+    useEffect(() => {
+        if (initialProductData) {
+            setTitle(initialProductData.title);
+            setPrice(initialProductData.price.toString());
+            setCategory(initialProductData.category);
+            setDescription(initialProductData.description);
+            setShortDescription(initialProductData.shortDescription);
+            setImage(initialProductData.imageurl);
+        }
+    }, [initialProductData]);
+
     return (
-        <form className="w-full max-w-5xl mt-8" onSubmit={handleSubmit}>
+        <form className="w-full max-w-5xl mt-5" onSubmit={handleSubmit}>
             <div className="flex flex-wrap -mx-3 mb-6 justify-center">
                 <ToastContainer />
                 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -91,12 +125,13 @@ const FormAddProduct = () => {
                         id="grid-first-name"
                         type="text"
                         placeholder="Title"
+                        value={title}
                         onChange={handleTitleChange}
                       />
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" >
                         Price ($)
                     </label>
-                    <input className="inputStyle" id="grid-first-name" type="number" placeholder="0.0" onChange={handlePriceChange}/>
+                    <input className="inputStyle" id="grid-first-name" type="number" placeholder="0.0" onChange={handlePriceChange} value={price}/>
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" >
                         Category
                     </label>
@@ -119,10 +154,10 @@ const FormAddProduct = () => {
                             <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
                         </div>
                     </div>
-                    <label htmlFor="description" className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"'>Description:</label>
-                    <textarea id="description" name="description" className="inputStyle"  onChange={handleDescriptionChange}></textarea>
-                    <label htmlFor="description" className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"' >Short Description:</label>
-                    <textarea id="description" name="description" className="inputStyle" onChange={handleShortDescriptionChange}></textarea>
+                    <label htmlFor="description" className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"'>Description:</label>
+                    <textarea id="description" name="description" className="inputStyle"  onChange={handleDescriptionChange} value={description}></textarea>
+                    <label htmlFor="description" className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"' >Short Description:</label>
+                    <textarea id="description" name="description" className="inputStyle" onChange={handleShortDescriptionChange} value={shortDescription}></textarea>
                     <label htmlFor="image">Upload Image:</label>
                     <input
                         type="file"
@@ -132,11 +167,25 @@ const FormAddProduct = () => {
                         onChange={handleImageChange}
 
                     />
-                    <button className={`bg-blue-900 text-white font-bold py-2 px-4 rounded mt-6`}
-                        disabled={loading}
-                    >
-                        {loading ? 'Adding...' : 'Add Product'}
-                    </button> 
+                    {image.length > 1 && !showAddButton  &&
+                        <Image
+                        src={image}
+                        width={250}
+                        height={250}
+                        alt='image '
+                    />}
+                  
+                    {showAddButton ? (
+                        <button className={`bg-blue-900 text-white font-bold py-2 px-4 rounded mt-4`}
+                            disabled={loading}
+                        >
+                            {loading ? 'Adding...' : 'Add Product'}
+                        </button>
+                    ):  (
+                       
+                    <Button onClick={handleUpdate}  className='mt-2'>Update</Button>
+
+                    )}
                 </div>
 
             </div>
