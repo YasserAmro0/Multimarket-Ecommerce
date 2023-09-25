@@ -153,3 +153,14 @@ export const defaultProductData: ProductsProps = {
     avgRating: 0,
     reviews: []
 };
+
+export interface PaymentModal{
+    openModal: string | undefined;
+    setOpenModal: (value: string | undefined) => void;
+    calculateSubtotal: () => number;
+}
+export interface CheckoutT{
+    openModal: string | undefined;
+    setOpenModal: (value: string | undefined) => void;
+}
+

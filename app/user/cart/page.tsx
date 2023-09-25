@@ -7,6 +7,7 @@ import { Table } from '@/components';
 import { Metadata } from 'next/types';
 import axiosInstance from '@/utils/api/fetch';
 import { ProductCartType } from '@/types';
+import ModalPayment from '@/components/Payment/modal';
 
 export const metadata: Metadata = {
     title: 'cart',
@@ -16,6 +17,8 @@ export const metadata: Metadata = {
 const page = () => {
     const [cartData, setCartData] = useState<ProductCartType[]>([]);
     const [loading, setLoading] = useState(false);
+    const [openModal, setOpenModal] = useState<string | undefined>();
+
 
     useEffect(() => {
         getData();
@@ -76,14 +79,24 @@ const page = () => {
                             <span className='text-bold'>${calculateSubtotal()}</span>
                         </div>
                         <p>taxes and shipping will calculate in Checkout.</p>
-                        <div className='flex gap-1'>
-                            <button className='bg-[#0A1D37] hover:bg-blue-900 text-white font-bold py-2 px-12 rounded mt-6'>Checkout</button>
+                    <div className='flex gap-1'>
+                       
+                        <button
+                            onClick={() => setOpenModal('dismissible')} 
+                            className='bg-[#0A1D37] hover:bg-blue-900 text-white font-bold py-2 px-12 rounded mt-6'
+                        >
+                            Checkout
+                        </button>
                             <Link href='/user/shop' className='bg-[#0A1D37] hover:bg-blue-900 text-white font-bold py-2 px-4 rounded mt-6'>
                                 continue shopping
                             </Link>
                         </div>
                     </div>
-              
+                <ModalPayment
+                    openModal={openModal}
+                    setOpenModal={setOpenModal}
+                    calculateSubtotal={calculateSubtotal}
+                />
                       
            
             </div>
