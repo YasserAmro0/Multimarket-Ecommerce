@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { ToastContainer, toast } from 'react-toastify';
 import { AxiosError } from 'axios';
 import ModelUpdate from './ModelUpdate';
+import ModalDelete from './ModalDelete';
 
 
 const CustomTable = () => {
@@ -101,11 +102,8 @@ const CustomTable = () => {
                               <Table.Cell>{product.price}</Table.Cell>
                           <Table.Cell>{product.category}</Table.Cell>
                           <Table.Cell>
-
-                              <i className="ri-delete-bin-5-line text-red-500 text-xl cursor-pointer mr-1"
-                                  onClick={() => handleDelete(product._id)}
-                                  ></i>
-                                  <i className="ri-edit-2-fill text-xl cursor-pointer" onClick={()=>handleEditClick(product._id)}></i>
+                                  <ModalDelete _id={product._id} setProducts={setProducts} />
+                                  <i className="ri-edit-2-fill text-xl cursor-pointer" onClick={() => handleEditClick(product._id)}></i>
                           </Table.Cell>
                       </Table.Row>
                   ))

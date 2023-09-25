@@ -28,7 +28,11 @@ const ModelUpdate = ({ openModal, setOpenModal, productId }:any)=> {
    
     return (
         <>
-            <Modal dismissible show={props.openModal === 'dismissible'} onClose={() => props.setOpenModal(undefined)}>
+            <Modal dismissible
+                show={props.openModal === 'dismissible'}
+                onClose={() => props.setOpenModal(undefined)}
+                size={'xl'}
+            >
                 <Modal.Header>Update Product 🔧 </Modal.Header>
                 <Modal.Body>
                     <FormAddProduct showAddButton={false} initialProductData={initialProductData} />
