@@ -10,6 +10,7 @@ const Home = async () => {
     const product = await axios.get(`${process.env.SERVER_URL}product?q=&filterCategory=Filter%20By%20Category&minPrice=${0}&maxPrice=${0}`);
     
     const products: ProductsProps[] = product.data.data;
+    
 
     const loading = (
         <div className="text-center">

@@ -16,7 +16,7 @@ const Hero = () => {
                     <p className='pb-10'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor maiores aperiam temporibus vero
                         dolorum beatae perferendis incidunt soluta placeat harum eius. Est, ducimus praesentium.
                     </p>
-                    <Link href='/shop'>
+                    <Link href='/user/shop'>
                         <button
                             className='bg-[#0A1D37] hover:bg-blue-900 text-white font-bold py-2 px-4 rounded'
                         >
