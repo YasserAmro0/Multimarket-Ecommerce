@@ -1,6 +1,6 @@
 import axios from "axios";
 const axiosInstance = axios.create({
-    baseURL: process.env.SERVER_URL,
+    baseURL : process.env.SERVER_URL,
 });
 
 axiosInstance.interceptors.request.use(

@@ -6,9 +6,9 @@ import { ProductsProps } from "@/types";
 import { Suspense } from "react";
 
 
-const Home = async() => {
-
+const Home = async () => {
     const product = await axios.get(`${process.env.SERVER_URL}product?q=&filterCategory=Filter%20By%20Category&minPrice=${0}&maxPrice=${0}`);
+    
     const products: ProductsProps[] = product.data.data;
 
     const loading = (
