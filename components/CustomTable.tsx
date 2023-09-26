@@ -4,8 +4,7 @@ import { ProductsProps } from '@/types';
 import { Table } from 'flowbite-react';
 import axiosInstance from '@/utils/api/axios';
 import Image from 'next/image';
-import { ToastContainer, toast } from 'react-toastify';
-import { AxiosError } from 'axios';
+import { ToastContainer } from 'react-toastify';
 import ModelUpdate from './ModelUpdate';
 import ModalDelete from './ModalDelete';
 
@@ -16,18 +15,6 @@ const CustomTable = () => {
     const [openModal, setOpenModal] = useState<string | undefined>();
     const [selectedProductId, setSelectedProductId] = useState<string>();
 
-
-    const handleDelete = async(_id:string) => {
-        try {
-          const data =  await axiosInstance.delete(`admin/product/${_id}`);
-            setProducts((prevProduct) => prevProduct.filter((product) => product._id !== _id));
-            toast.success("delete product successfully ✔");
-        } catch (error) {
-            const err = error as AxiosError;
-            toast.error(err.message);
-        }
-    }
-    
 
     const handleEditClick = async (_id: string) => {
         setSelectedProductId(_id);
