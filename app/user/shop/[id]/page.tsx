@@ -10,7 +10,7 @@ import NotFound from '@/app/not-found';
 const page = async ({ params }: { params: Params }) => {
   let product;
   try {
-    product = await axios.get(`http://localhost:8001/api/v1/product/${params.id}`);
+    product = await axios.get(`${process.env.SERVER_URL}product/${params.id}`);
   } catch (error) {
     <NotFound/>
   }
