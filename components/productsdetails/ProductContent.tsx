@@ -71,12 +71,14 @@ const ProductContent = ({ product }: {product: ProductsProps }) => {
   }
   return (
     <div>
-      <div className='container flex gap-40'>
-       
-        <div>
+      <div className='container flex flex-col  md:flex-row gap-30 md:gap-40'>
+
+        {/* Mobile: Image First */}
+        <div className='md:order-1'>
           <Image src={product.imageurl ?? ''} height={650} width={650} alt='Image product' />
         </div>
-        <div>
+
+        <div className='md:order-2'>
           <h2>{product.title}</h2>
           {/* Rating */}
           <div className='flex mt-5'>
@@ -86,14 +88,12 @@ const ProductContent = ({ product }: {product: ProductsProps }) => {
               <i className="ri-star-fill"></i>
               <i className="ri-star-line"></i>
               <i className="ri-star-line"></i>
-
             </span>
           </div>
           {/* Price  */}
-         
           <div className='flex mt-8 '>
             <span className='text-xl mr-32'>${product.price}</span>
-            <span className='text-bold'>Category : {product.category}</span>
+            <span className='text-bold'>Category: {product.category}</span>
           </div>
 
           {/* DescriptionShort with Button */}
@@ -101,8 +101,8 @@ const ProductContent = ({ product }: {product: ProductsProps }) => {
             <label className='mr-2 mt-1 text-bold'>Quantity:</label>
             <input
               type='number'
-              min='1' 
-              value={quantity} 
+              min='1'
+              value={quantity}
               onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
               className='border border-gray-300 p-1 rounded w-24'
             />
@@ -110,12 +110,13 @@ const ProductContent = ({ product }: {product: ProductsProps }) => {
           <p className='mt-4'>{product.shortDescription}</p>
           {/* Button */}
           <button
-            className="bg-[#0A1D37] hover:bg-blue-900 text-white font-bold py-2 px-4 rounded mt-6" 
+            className="bg-[#0A1D37] hover:bg-blue-900 text-white font-bold py-2 px-4 rounded mt-6"
             onClick={handleAddToCart}
           >
-             Add to Cart
+            Add to Cart
           </button>
         </div>
+
         {isLoginModalOpen && (
           <Modal
             isOpen={isLoginModalOpen}
@@ -124,11 +125,11 @@ const ProductContent = ({ product }: {product: ProductsProps }) => {
             closeModel={() => setIsLoginModalOpen(false)}
             setLoginPage={setIsLoginPage}
           />
-          
         )}
       </div>
 
       <ToastContainer />
+
       <div className=' mt-8'>
         <div className='container'>
           {/* button switch */}
