@@ -6,7 +6,7 @@ import React, { useState } from 'react'
 const EditComment = ({ commentForEdit, setIsEditing, idReview, fetchReviews }: CommentEditType)=> {
     const [editedComment, setEditedComment] = useState(commentForEdit);
     const handleSaveClick = async() => {
-        await axiosInstance.put(`/review/${idReview}`, {
+        await axiosInstance.put(`review/${idReview}`, {
             newComment: editedComment,
         });
         setIsEditing(false);

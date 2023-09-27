@@ -92,7 +92,6 @@ const FormAddProduct = ({ showAddButton = true, initialProductData }: { showAddB
                 imageurl: image,
                 price,
             });
-            console.log(resposne);
             toast.success('update product done ✔');
 
         } catch (error) {
