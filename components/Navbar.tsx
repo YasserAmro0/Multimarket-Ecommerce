@@ -17,6 +17,11 @@ const Navbar = () => {
     const userContext = useContext(userDataContext);
     const router = useRouter()
     const pathname = usePathname();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const toggleMenuLinks = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
 
     const handleLogout = () => {
         localStorage.removeItem('access_token');
@@ -33,6 +38,7 @@ const Navbar = () => {
         <div className='bg-gray-50  shadow-md'>
             <div className='container flex justify-between'>
                 {/* Logo */}
+                <Link href="/">
                 <div className='flex gap-2'>
                     <Image
                         src={logoImage}
@@ -40,15 +46,17 @@ const Navbar = () => {
                         height={24}
                         alt='logo'
                     />
-                    <h3 className='text-xl font-bold'>
+                        <h3 className=' md:text-xl font-bold sm:text-sm'>
                         Multimarkt
                     </h3>
-                </div>
+                    </div>
+                </Link>
+               
 
                 {/* links  */}
-                <div className='flex justify-between'>
-                    <ul className="flex space-x-8">
-                        <li className={pathname === '/' ?'text-bold text-[#0A1D37]':''}>
+                <div className='flex md:justify-between'>
+                    <ul className="flex space-x-1  md:space-x-8">
+                        <li className={pathname === '/' ? 'text-bold text-[#0A1D37]' : ''}>
                             <Link href='/'>Home</Link>
                         </li>
                         <li className={pathname === '/user/shop' ? 'text-bold text-[#0A1D37]' : ''}>
@@ -59,6 +67,12 @@ const Navbar = () => {
                         </li>
                     </ul>
                 </div>
+
+
+
+
+
+
                 
 
                 {/* Icons */}

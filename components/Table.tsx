@@ -19,7 +19,7 @@ const Table = ({ loading, cartData, setCartData }: TableCartType) => {
   return (
       <div className="mt-10 max-h-[500px] overflow-y-auto">
           <ToastContainer />
-          <table className="min-w-full ">
+          <table className="min-w-full">
               <thead className='bg-white'>
                   <tr className="sticky top-0 ">
                       <th>Image</th>

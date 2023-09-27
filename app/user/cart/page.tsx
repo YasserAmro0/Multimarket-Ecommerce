@@ -55,45 +55,43 @@ const page = () => {
                     </div>
                 </div>
             </div>
-            <div className='flex justify-between container'>
-                {loading ? (
-                    <div className="text-center">
-                        <div className="spinner_status" role="status">
-                            <span className="spinner_loading">Loading...</span>
+            <div className='container flex flex-col md:flex-row justify-between'>
+                <div className="md:w-3/4 md:mb-4 mr-12"> {/* Add margin-bottom (mb-4) only on medium screens and larger */}
+                    {loading ? (
+                        <div className="text-center">
+                            <div className="spinner_status" role="status">
+                                <span className="spinner_loading">Loading...</span>
+                            </div>
                         </div>
-                    </div>
-                ): 
-                        <Table cartData = { cartData } loading = { loading }  setCartData = { setCartData } />
-                }
-              
-               
-                    <div>
-                        <div className='container flex justify-between items-center'>
-                            <h2>Subtotal</h2>
-                            <span className='text-bold'>${calculateSubtotal()}</span>
-                        </div>
-                        <p>taxes and shipping will calculate in Checkout.</p>
+                    ) : (
+                        <Table cartData={cartData} loading={loading} setCartData={setCartData} />
+                    )}
+                </div>
+
+                <div className='md:w-1/2 mt-10'>
+                    <h2>Subtotal</h2>
+                    <span className='text-bold'>${calculateSubtotal()}</span>
+                    <p>taxes and shipping will calculate in Checkout.</p>
                     <div className='flex gap-1'>
-                       
                         <button
-                            onClick={() => setOpenModal('dismissible')} 
+                            onClick={() => setOpenModal('dismissible')}
                             className='bg-[#0A1D37] hover:bg-blue-900 text-white font-bold py-2 px-12 rounded mt-6'
                         >
                             Checkout
                         </button>
-                            <Link href='/user/shop' className='bg-[#0A1D37] hover:bg-blue-900 text-white font-bold py-2 px-4 rounded mt-6'>
-                                continue shopping
-                            </Link>
-                        </div>
+                        <Link href='/user/shop' className='bg-[#0A1D37] hover:bg-blue-900 text-white font-bold py-2 px-4 rounded mt-6'>
+                            continue shopping
+                        </Link>
                     </div>
+                </div>
                 <ModalPayment
                     openModal={openModal}
                     setOpenModal={setOpenModal}
                     calculateSubtotal={calculateSubtotal}
                 />
-                      
-           
             </div>
+           
+
         </>
     );
 };
